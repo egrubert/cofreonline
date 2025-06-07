@@ -5,14 +5,16 @@ const authController = {
     showLogin: (req, res) => {
         res.render('auth', { 
             formType: 'login',
-            title: 'Login - CofreOnline'
+            title: 'Login - CofreOnline',
+            user: req.session.user || null // Garante que user existe
         });
     },
 
     showRegister: (req, res) => {
         res.render('auth', { 
             formType: 'register',
-            title: 'Registro - CofreOnline'
+            title: 'Registro - CofreOnline',
+            user: req.session.user || null // Garante que user existe
         });
     },
 

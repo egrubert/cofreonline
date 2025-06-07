@@ -1,0 +1,11 @@
+<section class="document-editor">
+    <h2>Criar Novo Documento</h2>
+    <form action="/documents" method="POST">
+        <div class="form-group">
+            <label for="title">Título do Documento:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <textarea id="myeditor" name="content"></textarea>
+        <button type="submit">Salvar Documento</button>
+    </form>
+</section>

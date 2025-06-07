@@ -112,3 +112,17 @@ footer {
     padding: 1rem 0;
     margin-top: 2rem;
 }
+/* Editor de Documentos -----------------------------------------------------------------------------------------------*/
+.document-editor {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tox-tinymce {
+    border-radius: 4px;
+    margin: 1rem 0;
+}

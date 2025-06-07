@@ -1,4 +1,7 @@
-<%- include('partials/header', { title, user }); %>
+<%- include('partials/header', { 
+    title: title,
+    user: typeof user !== 'undefined' ? user : null 
+}); %>
 
 <main>
     <div class="container">

@@ -8,4 +8,12 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/editor', (req, res) => {
+    res.render('editor', { 
+        title: 'Editor - CofreOnline',
+        user: req.session.user,
+        isEditorPage: true
+    });
+});
+
 module.exports = router;
