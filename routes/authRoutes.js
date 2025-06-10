@@ -8,6 +8,15 @@ router.use((req, res, next) => {
     next();
 });
 
+router.get('/login', (req, res) => {
+    res.render('auth', {
+        formType: 'login',
+        title: 'Login - CofreOnline',
+        user: null,
+        success: req.query.registered ? 'Cadastro realizado com sucesso! Faça login.' : null
+    });
+});
+
 router.get('/login', authController.showLogin);
 router.post('/login', authController.login);
 router.get('/register', authController.showRegister);

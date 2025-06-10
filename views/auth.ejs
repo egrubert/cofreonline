@@ -1,11 +1,18 @@
+html
 <%- include('partials/header', { 
-    title: title,
+    title: typeof title !== 'undefined' ? title : 'CofreOnline',
     user: typeof user !== 'undefined' ? user : null 
 }); %>
 
 <main>
     <div class="container">
-        <%- include('pages/auth-content', { formType }); %>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error"><%= error %></div>
+        <% } %>
+        <% if (typeof success !== 'undefined' && success) { %>
+            <div class="alert alert-success"><%= success %></div>
+        <% } %>
+        <%- include('pages/auth-content', { formType: typeof formType !== 'undefined' ? formType : 'login' }); %>
     </div>
 </main>
 
