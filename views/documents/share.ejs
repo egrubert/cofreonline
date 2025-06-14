@@ -1,0 +1,52 @@
+<%- include('../partials/header', { title: 'Compartilhar Documento', user: user }); %>
+
+<div class="container">
+    <h2>Compartilhar Documento: <%= document.nome %></h2>
+    
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error"><%= error %></div>
+    <% } %>
+    
+    <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success">Documento compartilhado com sucesso!</div>
+    <% } %>
+    
+    <form action="/documents/share" method="POST" class="share-form">
+        <input type="hidden" name="documentId" value="<%= document.id %>">
+        
+        <div class="form-group">
+            <label for="cpf">CPF do destinatário:</label>
+            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="canView" checked>
+                Permitir visualização
+            </label>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="canDownload">
+                Permitir download
+            </label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Compartilhar</button>
+        <a href="/documents" class="btn btn-secondary">Voltar</a>
+    </form>
+    
+    <h3>Compartilhamentos ativos</h3>
+    <ul class="shared-list">
+        <% shares.forEach(share => { %>
+            <li>
+                CPF: <%= share.cpf_destinatario %> | 
+                Visualização: <%= share.pode_visualizar ? 'Sim' : 'Não' %> | 
+                Download: <%= share.pode_baixar ? 'Sim' : 'Não' %>
+            </li>
+        <% }); %>
+    </ul>
+</div>
+
+<%- include('../partials/footer'); %>

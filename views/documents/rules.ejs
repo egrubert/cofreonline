@@ -1,0 +1,80 @@
+<%- include('../partials/header', { title: 'Regras de Liberação', user: user }); %>
+
+<div class="container">
+    <h2>Regras de Liberação: <%= document.nome %></h2>
+    
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error"><%= error %></div>
+    <% } %>
+    
+    <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success">Regra criada com sucesso!</div>
+    <% } %>
+    
+    <form action="/documents/rules" method="POST" class="rules-form">
+        <input type="hidden" name="documentId" value="<%= document.id %>">
+        
+        <div class="form-group">
+            <label for="ruleType">Tipo de Regra:</label>
+            <select id="ruleType" name="ruleType" required>
+                <option value="">Selecione...</option>
+                <option value="TODOS">Todos devem aprovar</option>
+                <option value="ALGUNS">Alguns devem aprovar</option>
+                <option value="DATA">Liberação por data</option>
+            </select>
+        </div>
+        
+        <div id="approversContainer" style="display: none;">
+            <div class="form-group">
+                <label>Aprovadores (CPF):</label>
+                <div id="approversList">
+                    <input type="text" name="approvers[]" placeholder="000.000.000-00">
+                </div>
+                <button type="button" id="addApprover" class="btn btn-small">+ Adicionar Aprovador</button>
+            </div>
+        </div>
+        
+        <div id="dateContainer" style="display: none;">
+            <div class="form-group">
+                <label for="releaseDate">Data de Liberação:</label>
+                <input type="datetime-local" id="releaseDate" name="releaseDate">
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Criar Regra</button>
+        <a href="/documents" class="btn btn-secondary">Voltar</a>
+    </form>
+    
+    <h3>Regras ativas</h3>
+    <ul class="rules-list">
+        <% rules.forEach(rule => { %>
+            <li>
+                Tipo: <%= rule.tipo_regra %> | 
+                Status: <%= rule.status %> | 
+                <% if (rule.data_liberacao) { %>
+                    Data: <%= new Date(rule.data_liberacao).toLocaleString() %>
+                <% } %>
+            </li>
+        <% }); %>
+    </ul>
+</div>
+
+<script>
+    document.getElementById('ruleType').addEventListener('change', function() {
+        const type = this.value;
+        document.getElementById('approversContainer').style.display = 
+            (type === 'TODOS' || type === 'ALGUNS') ? 'block' : 'none';
+        document.getElementById('dateContainer').style.display = 
+            (type === 'DATA') ? 'block' : 'none';
+    });
+
+    document.getElementById('addApprover').addEventListener('click', function() {
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'approvers[]';
+        newInput.placeholder = '000.000.000-00';
+        document.getElementById('approversList').appendChild(newInput);
+    });
+</script>
+
+<%- include('../partials/footer'); %>

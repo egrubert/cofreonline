@@ -1,0 +1,54 @@
+<%- include('../partials/header', { title: 'Meus Documentos', user: user }); %>
+
+<div class="container">
+    <h2>Meus Documentos</h2>
+    
+    <!-- Upload Form -->
+    <form action="/documents/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="document" required>
+        <input type="text" name="name" placeholder="Nome do documento (opcional)">
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Document List -->
+    <div class="document-list">
+        <% myDocuments.forEach(doc => { %>
+            <div class="document-card">
+                <h3><%= doc.nome %></h3>
+                <p>Tipo: <%= doc.tipo %></p>
+                <p>Tamanho: <%= (doc.tamanho / 1024).toFixed(2) %> KB</p>
+                
+                <div class="document-actions">
+                    <a href="/documents/share/<%= doc.id %>" class="btn">Compartilhar</a>
+                    <a href="/documents/rules/<%= doc.id %>" class="btn">Regras</a>
+                    <a href="/documents/download/<%= doc.id %>" class="btn">Download</a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+    <!-- Shared Documents -->
+    <h2>Compartilhados comigo</h2>
+    <div class="shared-list">
+        <% sharedWithMe.forEach(share => { %>
+            <div class="shared-card">
+                <h3><%= share.documento_nome %></h3>
+                <p>Compartilhado por: <%= share.usuario_nome %></p>
+                
+                <% if (share.regra_status === 'LIBERADO') { %>
+                    <a href="/documents/download/<%= share.documento_id %>" class="btn">Download</a>
+                <% } else { %>
+                    <p>Documento bloqueado - <%= share.regra_tipo %></p>
+                    <% if (share.precisa_minha_aprovacao) { %>
+                        <form action="/documents/approve" method="POST">
+                            <input type="hidden" name="ruleId" value="<%= share.regra_id %>">
+                            <button type="submit">Aprovar Liberação</button>
+                        </form>
+                    <% } %>
+                <% } %>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<%- include('../partials/footer'); %>

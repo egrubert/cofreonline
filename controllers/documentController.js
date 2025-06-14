@@ -3,58 +3,120 @@ const Share = require('../models/Share');
 const ReleaseRule = require('../models/ReleaseRule');
 const fs = require('fs');
 const path = require('path');
+const { validationResult } = require('express-validator');
+
+/**
+ * Cria regra familiar para documentos compartilhados com múltiplos usuários
+ * @param {number} documentId - ID do documento
+ * @param {string[]} childrenCPFs - Array de CPFs dos usuários que devem aprovar
+ */
+const createFamilyRule = async (documentId, childrenCPFs) => {
+    try {
+        // Validação básica dos CPFs
+        if (!Array.isArray(childrenCPFs) || childrenCPFs.length === 0) {
+            throw new Error('Lista de CPFs inválida');
+        }
+
+        const rule = await ReleaseRule.create({
+            documento_id: documentId,
+            tipo_regra: 'TODOS',
+            status: 'PENDENTE'
+        });
+
+        // Processamento em paralelo para melhor performance
+        await Promise.all(
+            childrenCPFs.map(cpf => ReleaseRule.addApprover(rule.id, cpf))
+        );
+
+        return rule;
+    } catch (error) {
+        console.error('Erro ao criar regra familiar:', error);
+        throw error;
+    }
+};
 
 module.exports = {
-    // Listar documentos do usuário
+    /**
+     * Lista documentos do usuário e compartilhados com ele
+     */
     list: async (req, res) => {
         try {
-            const myDocuments = await Document.findByUser(req.session.user.id);
-            const sharedWithMe = await Share.findByUser(req.session.user.cpf);
+            const [myDocuments, sharedWithMe] = await Promise.all([
+                Document.findByUser(req.session.user.id),
+                Share.findByUser(req.session.user.cpf)
+            ]);
             
             res.render('documents/list', {
                 title: 'Meus Documentos',
                 user: req.session.user,
                 myDocuments,
-                sharedWithMe
+                sharedWithMe,
+                success: req.flash('success'),
+                error: req.flash('error')
             });
         } catch (error) {
-            console.error(error);
-            res.status(500).send('Erro ao carregar documentos');
+            console.error('List error:', error);
+            req.flash('error', 'Erro ao carregar documentos');
+            res.redirect('/');
         }
     },
 
-    // Upload de documento
+    /**
+     * Upload de documento com validações
+     */
     upload: async (req, res) => {
-        try {
-            if (!req.files || !req.files.document) {
-                return res.status(400).send('Nenhum arquivo enviado');
-            }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            req.flash('error', errors.array()[0].msg);
+            return res.redirect('/documents');
+        }
 
+        try {
             const file = req.files.document;
-            const uploadPath = path.join(__dirname, '../public/uploads', file.name);
+            const fileExt = path.extname(file.name).toLowerCase();
+            const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${fileExt}`;
+            const uploadPath = path.join(__dirname, '../public/uploads', uniqueName);
 
             await file.mv(uploadPath);
 
-            const document = await Document.create({
-                nome: req.body.name || file.name,
-                caminho_arquivo: `/uploads/${file.name}`,
+            await Document.create({
+                nome: req.body.name || path.parse(file.name).name,
+                caminho_arquivo: `/uploads/${uniqueName}`,
                 tamanho: file.size,
                 tipo: file.mimetype,
                 usuario_id: req.session.user.id
             });
 
+            req.flash('success', 'Documento enviado com sucesso');
             res.redirect('/documents');
         } catch (error) {
-            console.error(error);
-            res.status(500).send('Erro no upload');
+            console.error('Upload error:', error);
+            req.flash('error', 'Falha no upload do documento');
+            res.redirect('/documents');
         }
     },
 
-    // Compartilhar documento
+    /**
+     * Compartilha documento com outro usuário
+     */
     share: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            req.flash('error', errors.array()[0].msg);
+            return res.redirect(`/documents/share/${req.body.documentId}`);
+        }
+
         try {
-            const { documentId, cpf, canView, canDownload } = req.body;
+            const { documentId, cpf, canView, canDownload, childrenCPFs } = req.body;
             
+            // Verifica se o documento pertence ao usuário
+            const document = await Document.findById(documentId);
+            if (document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
+            // Cria compartilhamento
             await Share.create({
                 documento_id: documentId,
                 cpf_destinatario: cpf,
@@ -62,89 +124,147 @@ module.exports = {
                 pode_baixar: canDownload === 'on'
             });
 
-            res.redirect(`/documents/share/${documentId}?success=1`);
+            // Se for compartilhamento familiar, cria regra
+            if (childrenCPFs && childrenCPFs.length > 0) {
+                await createFamilyRule(documentId, childrenCPFs.split(','));
+            }
+
+            req.flash('success', 'Documento compartilhado com sucesso');
+            res.redirect(`/documents/share/${documentId}`);
         } catch (error) {
-            console.error(error);
-            res.redirect(`/documents/share/${documentId}?error=1`);
+            console.error('Share error:', error);
+            req.flash('error', 'Erro ao compartilhar documento');
+            res.redirect(`/documents/share/${req.body.documentId}`);
         }
     },
 
-    // Criar regra de liberação
+    /**
+     * Cria regra de liberação para documento
+     */
     createRule: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            req.flash('error', errors.array()[0].msg);
+            return res.redirect(`/documents/rules/${req.body.documentId}`);
+        }
+
         try {
             const { documentId, ruleType, approvers, releaseDate } = req.body;
             
+            // Verifica se o documento pertence ao usuário
+            const document = await Document.findById(documentId);
+            if (document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
             const rule = await ReleaseRule.create({
                 documento_id: documentId,
                 tipo_regra: ruleType,
-                data_liberacao: ruleType === 'DATA' ? releaseDate : null,
+                data_liberacao: ruleType === 'DATA' ? new Date(releaseDate) : null,
                 status: 'PENDENTE'
             });
 
-            // Adicionar aprovadores
-            if (ruleType === 'ALGUNS' && approvers) {
+            // Adicionar aprovadores se necessário
+            if ((ruleType === 'ALGUNS' || ruleType === 'TODOS') && approvers) {
                 const approversList = Array.isArray(approvers) ? approvers : [approvers];
-                for (const cpf of approversList) {
-                    await ReleaseRule.addApprover(rule.id, cpf);
-                }
+                await Promise.all(
+                    approversList.map(cpf => ReleaseRule.addApprover(rule.id, cpf))
+                );
             }
 
-            res.redirect(`/documents/rules/${documentId}?success=1`);
+            req.flash('success', 'Regra criada com sucesso');
+            res.redirect(`/documents/rules/${documentId}`);
         } catch (error) {
-            console.error(error);
-            res.redirect(`/documents/rules/${documentId}?error=1`);
+            console.error('CreateRule error:', error);
+            req.flash('error', 'Erro ao criar regra');
+            res.redirect(`/documents/rules/${req.body.documentId}`);
         }
     },
 
-    // Aprovar liberação
+    /**
+     * Aprova liberação de documento
+     */
     approve: async (req, res) => {
         try {
             const { ruleId } = req.body;
             
             await ReleaseRule.approve(ruleId, req.session.user.cpf);
             
-            // Verificar se todas as aprovações foram concluídas
-            const rule = await ReleaseRule.findById(ruleId);
+            // Verifica se todas as aprovações foram concluídas
             const allApproved = await ReleaseRule.checkAllApproved(ruleId);
             
             if (allApproved) {
                 await ReleaseRule.updateStatus(ruleId, 'LIBERADO');
+                req.flash('success', 'Documento liberado com sucesso');
+            } else {
+                req.flash('success', 'Sua aprovação foi registrada');
             }
 
-            res.redirect('/documents?approved=1');
+            res.redirect('/documents');
         } catch (error) {
-            console.error(error);
-            res.redirect('/documents?error=1');
+            console.error('Approve error:', error);
+            req.flash('error', 'Erro ao aprovar liberação');
+            res.redirect('/documents');
         }
     },
 
-    // Download de documento
+    /**
+     * Download de documento com verificações de segurança
+     */
     download: async (req, res) => {
         try {
             const document = await Document.findById(req.params.id);
-            
-            // Verificar permissões
-            const canDownload = await Share.checkPermission(
-                document.id, 
-                req.session.user.cpf, 
-                'download'
-            );
-            
+            if (!document) {
+                req.flash('error', 'Documento não encontrado');
+                return res.redirect('/documents');
+            }
+
+            // Verifica permissões
+            const isOwner = document.usuario_id === req.session.user.id;
+            const canDownload = isOwner || 
+                await Share.checkPermission(document.id, req.session.user.cpf, 'download');
+
             if (!canDownload) {
-                return res.status(403).send('Acesso não autorizado');
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
+            // Verifica regras de liberação
+            const rules = await ReleaseRule.findByDocument(document.id);
+            const isBlocked = rules.some(rule => rule.status !== 'LIBERADO');
+            
+            if (rules.length > 0 && isBlocked) {
+                req.flash('error', 'Documento bloqueado por regras de liberação');
+                return res.redirect('/documents');
             }
 
             const filePath = path.join(__dirname, '../public', document.caminho_arquivo);
+            
+            if (!fs.existsSync(filePath)) {
+                req.flash('error', 'Arquivo não encontrado no servidor');
+                return res.redirect('/documents');
+            }
+
             res.download(filePath, document.nome);
         } catch (error) {
-            console.error(error);
-            res.status(500).send('Erro ao baixar arquivo');
+            console.error('Download error:', error);
+            req.flash('error', 'Erro ao baixar arquivo');
+            res.redirect('/documents');
         }
-    }
-        // Mostrar formulário de compartilhamento
+    },
+
+    /**
+     * Exibe formulário de compartilhamento
+     */
     showShareForm: async (req, res) => {
         try {
             const document = await Document.findById(req.params.id);
+            if (!document || document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
             const shares = await Share.findByDocument(req.params.id);
             
             res.render('documents/share', {
@@ -152,19 +272,27 @@ module.exports = {
                 user: req.session.user,
                 document,
                 shares,
-                error: req.query.error ? 'Erro ao compartilhar' : null,
-                success: req.query.success ? true : false
+                success: req.flash('success'),
+                error: req.flash('error')
             });
         } catch (error) {
-            console.error(error);
-            res.redirect('/documents?error=1');
+            console.error('ShowShareForm error:', error);
+            req.flash('error', 'Erro ao carregar formulário');
+            res.redirect('/documents');
         }
     },
 
-    // Mostrar formulário de regras
+    /**
+     * Exibe formulário de regras de liberação
+     */
     showRulesForm: async (req, res) => {
         try {
             const document = await Document.findById(req.params.id);
+            if (!document || document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
             const rules = await ReleaseRule.findByDocument(req.params.id);
             
             res.render('documents/rules', {
@@ -172,12 +300,13 @@ module.exports = {
                 user: req.session.user,
                 document,
                 rules,
-                error: req.query.error ? 'Erro ao criar regra' : null,
-                success: req.query.success ? true : false
+                success: req.flash('success'),
+                error: req.flash('error')
             });
         } catch (error) {
-            console.error(error);
-            res.redirect('/documents?error=1');
+            console.error('ShowRulesForm error:', error);
+            req.flash('error', 'Erro ao carregar formulário');
+            res.redirect('/documents');
         }
     }
 };

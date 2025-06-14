@@ -32,6 +32,7 @@ app.use((req, res, next) => {
 // Rotas
 app.use('/', require('./routes/mainRoutes'));
 app.use('/auth', require('./routes/authRoutes'));
+app.use('/documents', require('./routes/documents'));
 
 // Inicialização do servidor
 const PORT = process.env.PORT || 3000;
