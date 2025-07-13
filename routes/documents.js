@@ -13,4 +13,8 @@ router.post('/rules', documentController.createRule);
 router.post('/approve', documentController.approve);
 router.get('/download/:id', documentController.download);
 
+router.get('/approve/:id', documentController.showApprovalForm);
+router.post('/approve', documentController.approve);
+
+
 module.exports = router;

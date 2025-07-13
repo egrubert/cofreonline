@@ -310,3 +310,31 @@ footer p {
 a, button {
     transition: all 0.3s ease;
 }
+/* Approval Page Styles */
+.approval-container {
+    max-width: 800px;
+    margin-top: 2rem;
+}
+
+.approval-container .card {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.document-info {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    border-left: 4px solid #3498db;
+}
+
+/* Badges */
+.badge {
+    font-size: 0.85em;
+    padding: 0.35em 0.65em;
+}
+
+/* Icons */
+.fas {
+    margin-right: 0.5rem;
+}

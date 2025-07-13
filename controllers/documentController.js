@@ -38,6 +38,57 @@ const createFamilyRule = async (documentId, childrenCPFs) => {
 };
 
 module.exports = {
+
+
+    /**
+     * Processa aprovação do documento
+     */
+    approve: async (req, res) => {
+        try {
+            const { ruleId } = req.body;
+            
+            await ReleaseRule.approve(ruleId, req.session.user.cpf);
+            
+            const allApproved = await ReleaseRule.checkAllApproved(ruleId);
+            
+            if (allApproved) {
+                await ReleaseRule.updateStatus(ruleId, 'LIBERADO');
+                // Adicione notificação por e-mail aqui se necessário
+            }
+
+            req.flash('success', allApproved 
+                ? 'Documento liberado com sucesso!' 
+                : 'Sua aprovação foi registrada');
+            res.redirect('/documents');
+        } catch (error) {
+            console.error('Approve error:', error);
+            req.flash('error', 'Erro no processo de aprovação');
+            res.redirect('/documents');
+        }
+    },
+     /**
+     * Mostra formulário de aprovação
+     */
+    showApprovalForm: async (req, res) => {
+        try {
+            const rule = await ReleaseRule.findById(req.params.id);
+            const document = await Document.findById(rule.documento_id);
+            const owner = await User.findById(document.usuario_id);
+            
+            res.render('documents/approval', {
+                document,
+                rule,
+                owner,
+                user: req.session.user
+            });
+        } catch (error) {
+            console.error(error);
+            req.flash('error', 'Erro ao carregar aprovação');
+            res.redirect('/documents');
+        }
+    },
+    
+
     /**
      * Lista documentos do usuário e compartilhados com ele
      */
@@ -215,7 +266,7 @@ module.exports = {
     /**
      * Download de documento com verificações de segurança
      */
-    download: async (req, res) => {
+    download2: async (req, res) => {
         try {
             const document = await Document.findById(req.params.id);
             if (!document) {
@@ -256,6 +307,66 @@ module.exports = {
             res.redirect('/documents');
         }
     },
+            download: async (req, res) => {
+                try {
+                    const document = await Document.findById(req.params.id);
+                    if (!document) {
+                        req.flash('error', 'Documento não encontrado');
+                        return res.redirect('/documents');
+                    }
+
+                    // Verifica permissões básicas
+                    const isOwner = document.usuario_id === req.session.user.id;
+                    const sharedWithMe = await Share.findByUser(req.session.user.cpf);
+                    const canAccess = sharedWithMe.some(s => s.documento_id === document.id);
+
+                    if (!isOwner && !canAccess) {
+                        req.flash('error', 'Acesso não autorizado');
+                        return res.redirect('/documents');
+                    }
+
+                    // Verifica regras de liberação
+                    // Verifica regras de liberação
+                const rules = await ReleaseRule.findByDocument(document.id);
+                if (rules.length > 0) {
+                    const allRulesApproved = await Promise.all(rules.map(async (rule) => {
+                        // Se já está liberado, não precisa verificar mais
+                        if (rule.status === 'LIBERADO') return true;
+                        
+                        // Verifica se o usuário atual é um aprovador pendente
+                        const isApprover = await ReleaseRule.isUserApprover(rule.id, req.session.user.cpf);
+                        const needsMyApproval = isApprover && 
+                                            (rule.tipo_regra === 'TODOS' || 
+                                            rule.tipo_regra === 'ALGUNS');
+                        
+                        // Se precisa da minha aprovação e eu não aprovei ainda
+                        if (needsMyApproval) {
+                            const hasApproved = await ReleaseRule.hasUserApproved(rule.id, req.session.user.cpf);
+                            return hasApproved;
+                        }
+                        
+                        return true;
+                    }));
+                    
+                    // Se alguma regra não foi aprovada
+                    if (allRulesApproved.includes(false)) {
+                        req.flash('error', 'Documento bloqueado - existem regras de liberação pendentes');
+                        return res.redirect('/documents');
+                    }
+                }
+                    
+                    //-----------------------------------------------------------------------------------
+
+                const filePath = path.join(__dirname, '../public', document.caminho_arquivo);
+                    res.download(filePath, document.nome);
+                } catch (error) {
+                    console.error('Download error:', error);
+                    req.flash('error', 'Erro ao baixar arquivo');
+                    res.redirect('/documents');
+                }
+            },
+
+
 
     /**
      * Exibe formulário de compartilhamento
@@ -309,6 +420,78 @@ module.exports = {
         } catch (error) {
             console.error('ShowRulesForm error:', error);
             req.flash('error', 'Erro ao carregar formulário');
+            res.redirect('/documents');
+        }
+    },
+    /**
+     * Mostra tela de aprovação
+     */
+    showApprovalForm: async (req, res) => {
+        try {
+            const rule = await ReleaseRule.findById(req.params.id);
+            if (!rule) {
+                req.flash('error', 'Regra de liberação não encontrada');
+                return res.redirect('/documents');
+            }
+
+            const document = await Document.findById(rule.documento_id);
+            const owner = await User.findById(document.usuario_id);
+            
+            // Verifica se o usuário atual é um aprovador
+            const isApprover = await ReleaseRule.isUserApprover(rule.id, req.session.user.cpf);
+            if (!isApprover) {
+                req.flash('error', 'Você não tem permissão para aprovar este documento');
+                return res.redirect('/documents');
+            }
+
+            res.render('documents/approval', {
+                title: 'Aprovar Documento',
+                user: req.session.user,
+                document,
+                rule,
+                owner
+            });
+        } catch (error) {
+            console.error('ShowApprovalForm error:', error);
+            req.flash('error', 'Erro ao carregar formulário de aprovação');
+            res.redirect('/documents');
+        }
+    },
+
+    /**
+     * Processa aprovação
+     */
+    approve: async (req, res) => {
+        try {
+            const { ruleId } = req.body;
+            
+            // Verifica se o usuário é um aprovador válido
+            const isApprover = await ReleaseRule.isUserApprover(ruleId, req.session.user.cpf);
+            if (!isApprover) {
+                req.flash('error', 'Você não tem permissão para aprovar este documento');
+                return res.redirect('/documents');
+            }
+
+            // Registra aprovação
+            await ReleaseRule.approve(ruleId, req.session.user.cpf);
+            
+            // Verifica se todas as aprovações foram concluídas
+            const allApproved = await ReleaseRule.checkAllApproved(ruleId);
+            
+            if (allApproved) {
+                await ReleaseRule.updateStatus(ruleId, 'LIBERADO');
+                
+                // Aqui você pode adicionar notificação por e-mail
+                // await sendApprovalNotification(ruleId);
+            }
+
+            req.flash('success', allApproved 
+                ? 'Documento liberado com sucesso!' 
+                : 'Sua aprovação foi registrada');
+            res.redirect('/documents');
+        } catch (error) {
+            console.error('Approve error:', error);
+            req.flash('error', 'Erro ao processar aprovação');
             res.redirect('/documents');
         }
     }

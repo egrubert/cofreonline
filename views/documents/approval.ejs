@@ -1,0 +1,54 @@
+<%- include('../partials/header', { 
+    title: 'Aprovação de Documento - CofreOnline', 
+    user: user 
+}); %>
+
+<div class="container approval-container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="mb-0">Aprovação Pendente</h3>
+        </div>
+        
+        <div class="card-body">
+            <div class="document-info mb-4">
+                <h4><%= document.nome %></h4>
+                <p class="text-muted">Enviado por: <%= owner.nome %></p>
+                <p><strong>Tipo de Regra:</strong> 
+                    <span class="badge bg-primary">
+                        <%= rule.tipo_regra === 'TODOS' ? 'Todos devem aprovar' : 
+                           rule.tipo_regra === 'ALGUNS' ? 'Alguns devem aprovar' : 
+                           'Liberação por data' %>
+                    </span>
+                </p>
+                
+                <% if (rule.tipo_regra === 'DATA') { %>
+                    <p><strong>Data de Liberação:</strong> 
+                        <span class="text-success">
+                            <%= new Date(rule.data_liberacao).toLocaleString() %>
+                        </span>
+                    </p>
+                <% } %>
+            </div>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Este documento só será liberado após todas as aprovações necessárias.
+            </div>
+
+            <form action="/documents/approve" method="POST" class="mt-4">
+                <input type="hidden" name="ruleId" value="<%= rule.id %>">
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/documents" class="btn btn-secondary me-md-2">
+                        <i class="fas fa-arrow-left me-1"></i> Voltar
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check-circle me-1"></i> Confirmar Aprovação
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer'); %>
