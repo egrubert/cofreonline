@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
-const flash = require('connect-flash'); // Adicionado
+const flash = require('connect-flash');
 
-// Configuração do app
+// Inicialização do app
 const app = express();
 
 // Configuração da view engine (EJS)
@@ -13,23 +13,23 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configuração de sessão (simplificada)
+// Configuração de sessão
 app.use(session({
-    secret: 'seuSegredoSuperSecreto',
+    secret: process.env.SESSION_SECRET || 'seuSegredoSuperSecreto',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { 
-        secure: false, // Defina como true em produção com HTTPS
         maxAge: 24 * 60 * 60 * 1000 // 1 dia
     }
 }));
 
-// Configuração do flash messages (DEVE vir após a sessão)
+// Flash messages
 app.use(flash());
 
-// Middleware para definir variáveis padrão para todas as views
+// Variáveis globais para views
 app.use((req, res, next) => {
     res.locals.user = req.session.user || null;
     res.locals.error = req.flash('error');
@@ -42,25 +42,27 @@ app.use('/', require('./routes/mainRoutes'));
 app.use('/auth', require('./routes/authRoutes'));
 app.use('/documents', require('./routes/documents'));
 
-// Middleware de erro 404
-app.use((req, res, next) => {
+// Tratamento de erro 404
+app.use((req, res) => {
     res.status(404).render('error', {
         title: 'Página não encontrada',
-        message: 'A página que você está procurando não existe.'
+        message: 'A página que você está procurando não existe.',
+        user: req.session.user || null
     });
 });
 
-// Middleware de tratamento de erros
+// Tratamento de erros
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    console.error(`Erro: ${err.stack}`);
     res.status(500).render('error', {
         title: 'Erro no servidor',
-        message: 'Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.'
+        message: 'Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.',
+        user: req.session.user || null
     });
 });
 
 // Inicialização do servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });

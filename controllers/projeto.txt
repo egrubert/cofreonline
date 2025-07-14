@@ -1,0 +1,3301 @@
+cofreonline/
+├── node_modules/
+├── public/
+│   ├── css/
+│   │   └── style.css
+                /* Reset básico */
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Arial', sans-serif;
+                }
+
+                body {
+                    line-height: 1.6;
+                    color: #333;
+                    background-color: #f5f5f5;
+                }
+
+                .container {
+                    width: 90%;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 0 15px;
+                }
+
+                /* Header */
+                header {
+                    background-color: #2c3e50;
+                    color: white;
+                    padding: 1rem 0;
+                    position: sticky;
+                    top: 0;
+                    z-index: 100;
+                }
+
+                header .container {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .logo h1 {
+                    font-size: 1.5rem;
+                }
+
+                .auth {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                .auth a {
+                    color: white;
+                    text-decoration: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 4px;
+                    transition: all 0.3s ease;
+                }
+
+                .auth a:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                    text-decoration: none;
+                }
+
+                /* Página Inicial */
+                .home-container {
+                    max-width: 1200px;
+                    margin: 2rem auto;
+                    padding: 2rem 1rem;
+                }
+
+                .hero-section {
+                    text-align: center;
+                    padding: 3rem 2rem;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 3rem;
+                }
+
+                .hero-section h2 {
+                    font-size: 2.2rem;
+                    margin-bottom: 1rem;
+                    color: #2c3e50;
+                }
+
+                .hero-section p {
+                    font-size: 1.1rem;
+                    color: #555;
+                    margin-bottom: 2rem;
+                    max-width: 700px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .auth-buttons {
+                    display: flex;
+                    gap: 1rem;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                }
+
+                .btn {
+                    display: inline-block;
+                    padding: 0.8rem 1.5rem;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                }
+
+                .btn-primary {
+                    background-color: #3498db;
+                    color: white;
+                }
+
+                .btn-primary:hover {
+                    background-color: #2980b9;
+                    transform: translateY(-2px);
+                }
+
+                .btn-secondary {
+                    background-color: #2c3e50;
+                    color: white;
+                }
+
+                .btn-secondary:hover {
+                    background-color: #1a252f;
+                    transform: translateY(-2px);
+                }
+
+                .features-section {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 2rem;
+                    margin-top: 3rem;
+                }
+
+                .feature-card {
+                    background: white;
+                    padding: 2rem;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    transition: all 0.3s ease;
+                    text-align: center;
+                }
+
+                .feature-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                }
+
+                .feature-card h3 {
+                    font-size: 1.3rem;
+                    margin-bottom: 1rem;
+                    color: #2c3e50;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                }
+
+                .feature-card p {
+                    color: #666;
+                    font-size: 0.95rem;
+                }
+
+                /* Formulários */
+                .auth-form {
+                    max-width: 500px;
+                    margin: 2rem auto;
+                    padding: 2rem;
+                    background: white;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                .auth-form h2 {
+                    margin-bottom: 1.5rem;
+                    text-align: center;
+                    color: #2c3e50;
+                }
+
+                .form-group {
+                    margin-bottom: 1.5rem;
+                }
+
+                .form-group label {
+                    display: block;
+                    margin-bottom: 0.5rem;
+                    color: #555;
+                    font-weight: 500;
+                }
+
+                .form-group input {
+                    width: 100%;
+                    padding: 0.75rem;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 1rem;
+                    transition: border 0.3s ease;
+                }
+
+                .form-group input:focus {
+                    border-color: #3498db;
+                    outline: none;
+                }
+
+                button {
+                    display: block;
+                    width: 100%;
+                    padding: 0.75rem;
+                    background-color: #2c3e50;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    transition: all 0.3s ease;
+                }
+
+                button:hover {
+                    background-color: #1a252f;
+                    transform: translateY(-2px);
+                }
+
+                /* Hero section */
+                .hero {
+                    text-align: center;
+                    padding: 3rem 0;
+                }
+
+                .hero h2 {
+                    font-size: 2rem;
+                    margin-bottom: 1rem;
+                }
+
+                /* Footer */
+                footer {
+                    background-color: #2c3e50;
+                    color: white;
+                    text-align: center;
+                    padding: 1.5rem 0;
+                    margin-top: 3rem;
+                }
+
+                footer p {
+                    margin: 0;
+                }
+
+                /* Editor de Documentos */
+                .document-editor {
+                    max-width: 800px;
+                    margin: 2rem auto;
+                    padding: 2rem;
+                    background: white;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                .tox-tinymce {
+                    border-radius: 4px;
+                    margin: 1rem 0;
+                }
+
+                /* Mensagens de alerta */
+                .alert {
+                    padding: 1rem;
+                    margin-bottom: 1rem;
+                    border-radius: 4px;
+                    font-weight: 500;
+                }
+
+                .alert-error {
+                    background-color: #ffebee;
+                    color: #c62828;
+                    border: 1px solid #ef9a9a;
+                }
+
+                .alert-success {
+                    background-color: #e8f5e9;
+                    color: #2e7d32;
+                    border: 1px solid #a5d6a7;
+                }
+
+                /* Responsividade */
+                @media (max-width: 768px) {
+                    .hero-section {
+                        padding: 2rem 1rem;
+                    }
+                    
+                    .auth-buttons {
+                        flex-direction: column;
+                        gap: 0.5rem;
+                    }
+                    
+                    .btn {
+                        width: 100%;
+                        text-align: center;
+                    }
+                    
+                    header .container {
+                        flex-direction: column;
+                        gap: 1rem;
+                    }
+                    
+                    .auth {
+                        width: 100%;
+                        justify-content: center;
+                    }
+                }
+
+                /* Efeitos de transição para interações */
+                a, button {
+                    transition: all 0.3s ease;
+                }
+                /* Approval Page Styles */
+                .approval-container {
+                    max-width: 800px;
+                    margin-top: 2rem;
+                }
+
+                .approval-container .card {
+                    border: none;
+                    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                }
+
+                .document-info {
+                    padding: 1.5rem;
+                    background-color: #f8f9fa;
+                    border-radius: 0.5rem;
+                    border-left: 4px solid #3498db;
+                }
+
+                /* Badges */
+                .badge {
+                    font-size: 0.85em;
+                    padding: 0.35em 0.65em;
+                }
+
+                /* Icons */
+                .fas {
+                    margin-right: 0.5rem;
+                }
+│   ├── js/
+│   │   └── scripts.js
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Verifica se existe o textarea do editor
+                    if (document.getElementById('myeditor')) {
+                        tinymce.init({
+                            selector: '#myeditor',
+                            height: 500,
+                            plugins: [
+                                'advlist autolink lists link image charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount'
+                            ],
+                            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                                    alignleft aligncenter alignright alignjustify | \
+                                    bullist numlist outdent indent | removeformat | help',
+                            skin_url: '/tinymce/skins/ui/oxide',
+                            content_css: '/tinymce/skins/content/default/content.css'
+                        });
+                    }
+                });
+│   ├── uploads/
+│   └── tinymce/ (você adicionará depois)
+├── views/
+│   ├── documents/
+│   │   ├── approval.ejs
+<%- include('../partials/header', { 
+    title: 'Aprovação de Documento - CofreOnline', 
+    user: user 
+}); %>
+
+<div class="container approval-container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="mb-0">Aprovação Pendente</h3>
+            <% if (approvalProgress) { %>
+                <div class="progress mt-2" style="height: 10px;">
+                    <div class="progress-bar bg-success" 
+                         role="progressbar" 
+                         style="width: <%= approvalProgress.percentage %>%;"
+                         aria-valuenow="<%= approvalProgress.percentage %>" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                </div>
+                <small class="text-muted">
+                    <%= approvalProgress.approved %> de <%= approvalProgress.total %> aprovadores confirmados
+                </small>
+            <% } %>
+        </div>
+        
+        <div class="card-body">
+            <div class="document-info mb-4">
+                <h4><%= document.nome %></h4>
+                <p class="text-muted">Enviado por: <%= owner.nome %></p>
+                <p><strong>Tipo de Regra:</strong> 
+                    <span class="badge bg-primary">
+                        <%= rule.tipo_regra === 'TODOS' ? 'Todos devem aprovar' : 
+                           rule.tipo_regra === 'ALGUNS' ? 'Aprovadores selecionados' : 
+                           'Liberação por data' %>
+                    </span>
+                </p>
+                
+                <% if (rule.tipo_regra === 'DATA') { %>
+                    <p><strong>Data de Liberação:</strong> 
+                        <span class="text-success">
+                            <%= new Date(rule.data_liberacao).toLocaleString() %>
+                        </span>
+                    </p>
+                <% } else { %>
+                    <div class="mt-3">
+                        <h5>Aprovadores:</h5>
+                        <ul class="list-group">
+                            <% approvers.forEach(approver => { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <%= approver.nome %>
+                                    <span class="badge bg-<%= approver.aprovado ? 'success' : 'warning' %> rounded-pill">
+                                        <%= approver.aprovado ? 'Aprovado' : 'Pendente' %>
+                                    </span>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="alert alert-<%= rule.status === 'LIBERADO' ? 'success' : 'warning' %>">
+                <i class="fas fa-<%= rule.status === 'LIBERADO' ? 'check-circle' : 'exclamation-circle' %> me-2"></i>
+                <% if (rule.status === 'LIBERADO') { %>
+                    Documento liberado em <%= new Date(rule.updatedAt).toLocaleString() %>
+                <% } else { %>
+                    Este documento só será liberado após todas as aprovações necessárias.
+                <% } %>
+            </div>
+
+            <% if (rule.status !== 'LIBERADO') { %>
+                <form action="/documents/approve" method="POST" class="mt-4">
+                    <input type="hidden" name="ruleId" value="<%= rule.id %>">
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/documents" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-arrow-left me-1"></i> Voltar
+                        </a>
+                        <% if (!userApproved) { %>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-check-circle me-1"></i> Confirmar Aprovação
+                            </button>
+                        <% } else { %>
+                            <span class="btn btn-success disabled">
+                                <i class="fas fa-check-double me-1"></i> Você já aprovou
+                            </span>
+                        <% } %>
+                    </div>
+                </form>
+            <% } else { %>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/documents/download/<%= document.id %>" class="btn btn-success">
+                        <i class="fas fa-download me-1"></i> Baixar Documento
+                    </a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer'); %>
+│   │   ├── list.ejs
+<%- include('../partials/header', { title: 'Meus Documentos', user: user }); %>
+
+<div class="container">
+    <h2>Meus Documentos</h2>
+    
+    <!-- Upload Form -->
+    <form action="/documents/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="document" required>
+        <input type="text" name="name" placeholder="Nome do documento (opcional)">
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Document List -->
+    <div class="document-list">
+        <% myDocuments.forEach(doc => { %>
+            <div class="document-card">
+                <h3><%= doc.nome %></h3>
+                <p>Tipo: <%= doc.tipo %></p>
+                <p>Tamanho: <%= (doc.tamanho / 1024).toFixed(2) %> KB</p>
+                
+                <div class="document-actions">
+                    <a href="/documents/share/<%= doc.id %>" class="btn">Compartilhar</a>
+                    <a href="/documents/rules/<%= doc.id %>" class="btn">Regras</a>
+                    <a href="/documents/download/<%= doc.id %>" class="btn">Download</a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+    <!-- Shared Documents -->
+    <h2>Compartilhados comigo</h2>
+    <div class="shared-list">
+        <% sharedWithMe.forEach(share => { %>
+            <div class="shared-card">
+                <h3><%= share.documento_nome %></h3>
+                <p>Compartilhado por: <%= share.usuario_nome %></p>
+                
+                <% if (share.regra_status === 'LIBERADO') { %>
+                    <a href="/documents/download/<%= share.documento_id %>" class="btn">Download</a>
+                <% } else { %>
+                    <p>Documento bloqueado - <%= share.regra_tipo %></p>
+                    <% if (share.precisa_minha_aprovacao) { %>
+                        <form action="/documents/approve" method="POST">
+                            <input type="hidden" name="ruleId" value="<%= share.regra_id %>">
+                            <button type="submit">Aprovar Liberação</button>
+                        </form>
+                    <% } %>
+                <% } %>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<%- include('../partials/footer'); %>
+│   │   ├── rule-detail.ejs
+<%- include('../partials/header') %>
+
+<h2>Regra para: <%= document.nome %></h2>
+
+<div class="rule-info">
+    <p><strong>Tipo:</strong> <%= rule.tipo_regra %></p>
+    <% if (rule.tipo_regra === 'DATA') { %>
+        <p><strong>Data de Liberação:</strong> <%= rule.data_liberacao.toLocaleString() %></p>
+    <% } %>
+    <p><strong>Status:</strong> <%= rule.status %></p>
+</div>
+
+<h3>Aprovadores</h3>
+<ul class="approvers-list">
+    <% approvers.forEach(approver => { %>
+        <li>
+            <%= approver.nome %> (CPF: <%= approver.cpf %>) - 
+            <span class="<%= approver.aprovado ? 'approved' : 'pending' %>">
+                <%= approver.aprovado ? '✅ Aprovado' : '⏳ Pendente' %>
+            </span>
+            <% if (approver.aprovado) { %>
+                <small>em <%= approver.data_aprovacao.toLocaleString() %></small>
+            <% } %>
+        </li>
+    <% }) %>
+</ul>
+
+<% if (isApprover && !hasApproved) { %>
+    <form action="/approve" method="POST">
+        <input type="hidden" name="ruleId" value="<%= rule.id %>">
+        <button type="submit" class="btn-approve">Aprovar Documento</button>
+    </form>
+<% } %>
+
+<%- include('../partials/footer') %>
+│   │   ├── rules.ejs
+<%- include('../partials/header', { title: 'Regras de Liberação', user: user }); %>
+
+<div class="container">
+    <h2>Regras de Liberação: <%= document.nome %></h2>
+    
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error"><%= error %></div>
+    <% } %>
+    
+    <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success">Regra criada com sucesso!</div>
+    <% } %>
+    
+    <form action="/documents/rules" method="POST" class="rules-form">
+        <input type="hidden" name="documentId" value="<%= document.id %>">
+        
+        <div class="form-group">
+            <label for="ruleType">Tipo de Regra:</label>
+            <select id="ruleType" name="ruleType" required>
+                <option value="">Selecione...</option>
+                <option value="TODOS">Todos devem aprovar</option>
+                <option value="ALGUNS">Alguns devem aprovar</option>
+                <option value="DATA">Liberação por data</option>
+            </select>
+        </div>
+        
+        <div id="approversContainer" style="display: none;">
+            <div class="form-group">
+                <label>Aprovadores (CPF):</label>
+                <div id="approversList">
+                    <input type="text" name="approvers[]" placeholder="000.000.000-00">
+                </div>
+                <button type="button" id="addApprover" class="btn btn-small">+ Adicionar Aprovador</button>
+            </div>
+        </div>
+        
+        <div id="dateContainer" style="display: none;">
+            <div class="form-group">
+                <label for="releaseDate">Data de Liberação:</label>
+                <input type="datetime-local" id="releaseDate" name="releaseDate">
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Criar Regra</button>
+        <a href="/documents" class="btn btn-secondary">Voltar</a>
+    </form>
+    
+    <h3>Regras ativas</h3>
+    <ul class="rules-list">
+        <% rules.forEach(rule => { %>
+            <li>
+                Tipo: <%= rule.tipo_regra %> | 
+                Status: <%= rule.status %> | 
+                <% if (rule.data_liberacao) { %>
+                    Data: <%= new Date(rule.data_liberacao).toLocaleString() %>
+                <% } %>
+            </li>
+        <% }); %>
+    </ul>
+</div>
+
+<script>
+    document.getElementById('ruleType').addEventListener('change', function() {
+        const type = this.value;
+        document.getElementById('approversContainer').style.display = 
+            (type === 'TODOS' || type === 'ALGUNS') ? 'block' : 'none';
+        document.getElementById('dateContainer').style.display = 
+            (type === 'DATA') ? 'block' : 'none';
+    });
+
+    document.getElementById('addApprover').addEventListener('click', function() {
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'approvers[]';
+        newInput.placeholder = '000.000.000-00';
+        document.getElementById('approversList').appendChild(newInput);
+    });
+</script>
+
+<%- include('../partials/footer'); %>
+│   │   ├── share.ejs
+<%- include('../partials/header', { title: 'Compartilhar Documento', user: user }); %>
+
+<div class="container">
+    <h2>Compartilhar Documento: <%= document.nome %></h2>
+    
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error"><%= error %></div>
+    <% } %>
+    
+    <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success">Documento compartilhado com sucesso!</div>
+    <% } %>
+    
+    <form action="/documents/share" method="POST" class="share-form">
+        <input type="hidden" name="documentId" value="<%= document.id %>">
+        
+        <div class="form-group">
+            <label for="cpf">CPF do destinatário:</label>
+            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="canView" checked>
+                Permitir visualização
+            </label>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="canDownload">
+                Permitir download
+            </label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Compartilhar</button>
+        <a href="/documents" class="btn btn-secondary">Voltar</a>
+    </form>
+    
+    <h3>Compartilhamentos ativos</h3>
+    <ul class="shared-list">
+        <% shares.forEach(share => { %>
+            <li>
+                CPF: <%= share.cpf_destinatario %> | 
+                Visualização: <%= share.pode_visualizar ? 'Sim' : 'Não' %> | 
+                Download: <%= share.pode_baixar ? 'Sim' : 'Não' %>
+            </li>
+        <% }); %>
+    </ul>
+</div>
+
+<%- include('../partials/footer'); %>
+
+│   │   └── uploads.ejs
+<%- include('../partials/header', { title: 'Upload de Documento', user: user }); %>
+
+<div class="container">
+    <h2>Upload de Documento</h2>
+    
+    <form action="/documents/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+        <div class="form-group">
+            <label for="document">Selecione o arquivo:</label>
+            <input type="file" id="document" name="document" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="name">Nome do documento (opcional):</label>
+            <input type="text" id="name" name="name" placeholder="Deixe em branco para usar o nome original">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Enviar Documento</button>
+        <a href="/documents" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<%- include('../partials/footer'); %>
+│   ├── partials/
+│   │   ├── header.ejs
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <% if (typeof isEditorPage !== 'undefined' && isEditorPage) { %>
+        <script src="/tinymce/tinymce.min.js"></script>
+        <script src="/js/scripts.js"></script>
+    <% } %>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>CofreOnline</h1>
+            </div>
+            <div class="auth">
+                <% if (user) { %>
+                    <span>Bem-vindo, <%= user.nome %></span>
+                    <a href="/auth/logout">Sair</a>
+                <% } else { %>
+                    <a href="/auth/login">Login</a>
+                    <span>ou</span>
+                    <a href="/auth/register">Cadastre-se</a>
+                <% } %>
+            </div>
+        </div>
+    </header>
+│   │   └── footer.ejs
+<footer>
+    <div class="container">
+        <p>&copy; 2023 CofreOnline - Todos os direitos reservados</p>
+    </div>
+</footer>
+</body>
+</html>
+url(views/partials/footer.ejs)
+│   ├── pages/
+│   │   ├── home-content.ejs
+<section class="hero">
+    <h2>Seu testamento digital seguro</h2>
+    <p>Proteja seus documentos importantes e defina regras de acesso para seus herdeiros.</p>
+</section>
+│   │   ├── document-content.ejs
+<section class="document-editor">
+    <h2>Criar Novo Documento</h2>
+    <form action="/documents" method="POST">
+        <div class="form-group">
+            <label for="title">Título do Documento:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <textarea id="myeditor" name="content"></textarea>
+        <button type="submit">Salvar Documento</button>
+    </form>
+</section>
+│   │   └── auth-content.ejs
+<section class="auth-form">
+    <% if (formType === 'login') { %>
+        <h2>Login</h2>
+        <form action="/auth/login" method="POST">
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="/auth/register">Cadastre-se</a></p>
+    <% } else { %>
+    <h2>Cadastro</h2>
+    <form action="/auth/register" method="POST" autocomplete="on">
+        <div class="form-group">
+            <label for="nome">Nome completo:</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" autocomplete="new-password" required>
+        </div>
+        <button type="submit">Cadastrar</button>
+    </form>
+    <p>Já tem uma conta? <a href="/auth/login">Faça login</a></p>
+<% } %>
+</section>
+│   ├── editor.ejs
+<%- include('partials/header', { title, user, isEditorPage }); %>
+
+<main>
+    <div class="container">
+        <%- include('pages/document-content'); %>
+    </div>
+</main>
+
+<%- include('partials/footer'); %>
+│   ├── index.ejs
+<%- include('partials/header', { title: 'CofreOnline - Seu testamento digital', user: user }); %>
+
+<main class="home-container">
+    <div class="hero-section">
+        <h2>Guarde e compartilhe documentos com segurança</h2>
+        <p>Proteja seus arquivos importantes com nosso sistema de liberação por aprovação múltipla</p>
+        
+        <% if (user) { %>
+            <div class="auth-buttons">
+                <a href="/documents" class="btn btn-primary">Acessar Meus Documentos</a>
+            </div>
+        <% } else { %>
+            <div class="auth-buttons">
+                <a href="/auth/login" class="btn btn-primary">Login</a>
+                <a href="/auth/register" class="btn btn-secondary">Cadastre-se</a>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="features-section">
+        <div class="feature-card">
+            <h3>📁 Upload Seguro</h3>
+            <p>Armazene seus documentos com criptografia</p>
+        </div>
+        <div class="feature-card">
+            <h3>👥 Compartilhamento Controlado</h3>
+            <p>Defina quem pode acessar cada documento</p>
+        </div>
+        <div class="feature-card">
+            <h3>🔒 Liberação por Regras</h3>
+            <p>Exija aprovações múltiplas para acesso</p>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer'); %>
+│   └── auth.ejs
+html
+<%- include('partials/header', { 
+    title: typeof title !== 'undefined' ? title : 'CofreOnline',
+    user: typeof user !== 'undefined' ? user : null 
+}); %>
+
+<main>
+    <div class="container">
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error"><%= error %></div>
+        <% } %>
+        <% if (typeof success !== 'undefined' && success) { %>
+            <div class="alert alert-success"><%= success %></div>
+        <% } %>
+        <%- include('pages/auth-content', { formType: typeof formType !== 'undefined' ? formType : 'login' }); %>
+    </div>
+</main>
+
+<%- include('partials/footer'); %>
+├── routes/
+│   ├── authRoutes.js
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController');
+
+// Middleware para garantir que user esteja disponível
+router.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
+
+router.get('/login', (req, res) => {
+    res.render('auth', {
+        formType: 'login',
+        title: 'Login - CofreOnline',
+        user: null,
+        success: req.query.registered ? 'Cadastro realizado com sucesso! Faça login.' : null
+    });
+});
+
+router.get('/login', authController.showLogin);
+router.post('/login', authController.login);
+router.get('/register', authController.showRegister);
+router.post('/register', authController.register);
+router.get('/logout', authController.logout);
+
+module.exports = router;
+│   ├── documents.js
+const express = require('express');
+const router = express.Router();
+const documentController = require('../controllers/documentController');
+const upload = require('../config/multer');
+
+// Certifique-se de que documentController tem todas as funções necessárias
+router.get('/', documentController.list);
+router.post('/upload', upload.single('document'), documentController.upload);
+router.get('/share/:id', documentController.showShareForm);
+router.post('/share', documentController.share);
+router.get('/rules/:id', documentController.showRulesForm);
+router.post('/rules', documentController.createRule);
+router.post('/approve', documentController.approve);
+router.get('/download/:id', documentController.download);
+
+router.get('/approve/:id', documentController.showApprovalForm);
+router.post('/approve', documentController.approve);
+router.get('/delete/:id', documentController.delete);
+router.post('/delete', documentController.deleteMultiple);
+
+// Rotas para aprovações
+router.get('/approvals/pending', documentController.pendingApprovals);
+router.get('/rules/:id', documentController.showRuleDetails);
+
+// Middleware de verificação para rotas de documento
+router.get('/documents/download/:id', 
+    documentController.checkDocumentReleased, 
+    documentController.download
+);
+
+module.exports = router;
+│   └── mainRoutes.js
+const express = require('express');
+const router = express.Router();
+
+router.get('/', (req, res) => {
+    res.render('index', { 
+        title: 'CofreOnline - Seu testamento digital',
+        user: req.session.user 
+    });
+});
+
+router.get('/editor', (req, res) => {
+    res.render('editor', { 
+        title: 'Editor - CofreOnline',
+        user: req.session.user,
+        isEditorPage: true
+    });
+});
+
+module.exports = router;
+├── controllers/
+│   ├── authController.js
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+
+const authController = {
+    showLogin: (req, res) => {
+        res.render('auth', { 
+            formType: 'login',
+            title: 'Login - CofreOnline',
+            user: req.session.user || null,
+            error: req.query.error ? 'Credenciais inválidas' : null,
+            success: req.query.registered ? 'Cadastro realizado com sucesso! Faça login.' : null,
+            redirectTo: req.query.redirectTo || '/'
+        });
+    },
+
+    showRegister: (req, res) => {
+        res.render('auth', { 
+            formType: 'register',
+            title: 'Registro - CofreOnline',
+            user: req.session.user || null,
+            error: null, // Garante que error existe
+            success: null // Garante que success existe
+        });
+    },
+
+    login: async (req, res) => {
+        try {
+            const { email, senha } = req.body;
+            const redirectTo = req.body.redirectTo || '/';
+
+            // 1. Verificar se usuário existe
+            const user = await User.findByEmail(email);
+            if (!user) {
+                return res.redirect('/auth/login?error=1');
+            }
+
+            // 2. Validar senha
+            const isPasswordValid = await bcrypt.compare(senha, user.senha);
+            if (!isPasswordValid) {
+                return res.redirect('/auth/login?error=1');
+            }
+
+            // 3. Criar sessão
+            req.session.user = {
+                id: user.id,
+                nome: user.nome,
+                email: user.email,
+                cpf: user.cpf
+            };
+
+            // 4. Redirecionar
+            res.redirect(redirectTo);
+
+        } catch (error) {
+            console.error('Erro no login:', error);
+            res.redirect('/auth/login?error=1');
+        }
+    },
+
+    register: async (req, res) => {
+        try {
+            const { nome, email, cpf, senha } = req.body;
+            // Verifica se usuário já existe
+            const existingUser = await User.findByEmail(email);
+            if (existingUser) {
+                return res.render('auth', {
+                    formType: 'register',
+                    title: 'Registro - CofreOnline',
+                    user: null,
+                    error: 'E-mail já cadastrado',
+                    success: null
+                });
+            }
+            
+            // 1. Validações básicas
+            if (!nome || !email || !cpf || !senha) {
+                return res.render('auth', {
+                    formType: 'register',
+                    title: 'Registro - CofreOnline',
+                    user: null,
+                    error: 'Todos os campos são obrigatórios'
+                });
+            }
+
+            // 2. Verificar se usuário já existe
+            const existingUserByEmail = await User.findByEmail(email);
+            if (existingUserByEmail) {
+                return res.render('auth', {
+                    formType: 'register',
+                    title: 'Registro - CofreOnline',
+                    user: null,
+                    error: 'E-mail já cadastrado'
+                });
+            }
+
+            const existingUserByCpf = await User.findByCpf(cpf);
+            if (existingUserByCpf) {
+                return res.render('auth', {
+                    formType: 'register',
+                    title: 'Registro - CofreOnline',
+                    user: null,
+                    error: 'CPF já cadastrado'
+                });
+            }
+
+            // 3. Criptografar senha
+            const hashedPassword = await bcrypt.hash(senha, 12);
+            
+            // 4. Criar usuário
+            await User.create({
+                nome,
+                email,
+                cpf,
+                senha: hashedPassword
+            });
+
+            // 5. Redirecionar para login com mensagem de sucesso
+            res.redirect('/auth/login?registered=true');
+
+        }  catch (error) {
+            console.error('Erro no registro:', error);
+            res.render('auth', {
+                formType: 'register',
+                title: 'Registro - CofreOnline',
+                user: null,
+                error: 'Erro no cadastro. Tente novamente.',
+                success: null
+            });
+        }
+    },
+
+    logout: (req, res) => {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error('Erro ao destruir sessão:', err);
+                return res.redirect('/');
+            }
+            res.redirect('/auth/login');
+        });
+    }
+};
+
+module.exports = authController;
+│   ├── documentController.js
+const Document = require('../models/Document');
+const Share = require('../models/Share');
+const ReleaseRule = require('../models/ReleaseRule');
+const User = require('../models/User');
+const fs = require('fs');
+const path = require('path');
+const { validationResult } = require('express-validator');
+const nodemailer = require('nodemailer');
+
+// Configuração do transporter de e-mail (opcional)
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+/**
+ * Cria regra familiar para documentos compartilhados com múltiplos usuários
+ */
+const createFamilyRule = async (documentId, childrenCPFs) => {
+    try {
+        if (!Array.isArray(childrenCPFs) || childrenCPFs.length === 0) {
+            throw new Error('Lista de CPFs inválida');
+        }
+
+        const rule = await ReleaseRule.create({
+            documento_id: documentId,
+            tipo_regra: 'TODOS',
+            status: 'PENDENTE'
+        });
+
+        await Promise.all(
+            childrenCPFs.map(cpf => ReleaseRule.addApprover(rule.id, cpf))
+        );
+
+        return rule;
+    } catch (error) {
+        console.error('Erro ao criar regra familiar:', error);
+        throw error;
+    }
+};
+
+/**
+ * Envia notificação por e-mail (opcional)
+ */
+const sendApprovalNotification = async (ruleId, document) => {
+    try {
+        const rule = await ReleaseRule.findById(ruleId);
+        const owner = await User.findById(document.usuario_id);
+        
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: owner.email,
+            subject: 'Documento Liberado - CofreOnline',
+            html: `<p>O documento <strong>${document.nome}</strong> foi liberado após todas as aprovações necessárias.</p>`
+        };
+
+        await transporter.sendMail(mailOptions);
+    } catch (error) {
+        console.error('Erro ao enviar e-mail:', error);
+    }
+};
+
+
+
+
+
+module.exports = {
+    /**
+     * Lista documentos do usuário e compartilhados com ele
+     */
+    list: async (req, res) => {
+        try {
+            const [myDocuments, sharedWithMe] = await Promise.all([
+                Document.findByUser(req.session.user.id),
+                Share.findByUser(req.session.user.cpf)
+            ]);
+            
+            // Filtra documentos pendentes de aprovação
+            const documentsWithPendingApproval = sharedWithMe.filter(doc => {
+                return doc.regra_status === 'PENDENTE' && doc.precisa_minha_aprovacao;
+            });
+
+            res.render('documents/list', {
+                title: 'Meus Documentos',
+                user: req.session.user,
+                myDocuments,
+                sharedWithMe,
+                pendingApprovals: documentsWithPendingApproval,
+                success: req.flash('success'),
+                error: req.flash('error')
+            });
+        } catch (error) {
+            console.error('List error:', error);
+            req.flash('error', 'Erro ao carregar documentos');
+            res.redirect('/');
+        }
+    },
+
+    /**
+     * Upload de documento
+     */
+    upload: async (req, res) => {
+        try {
+            if (!req.file) {
+                req.flash('error', 'Nenhum arquivo foi enviado');
+                return res.redirect('/documents');
+            }
+
+            const file = req.file;
+            const uniqueName = `${Date.now()}-${file.originalname}`;
+            const uploadPath = path.join(__dirname, '../public/uploads', uniqueName);
+
+            await file.mv(uploadPath);
+
+            const document = await Document.create({
+                nome: req.body.name || path.parse(file.originalname).name,
+                caminho_arquivo: `/uploads/${uniqueName}`,
+                tamanho: file.size,
+                tipo: file.mimetype,
+                usuario_id: req.session.user.id
+            });
+
+            req.flash('success', 'Documento enviado com sucesso!');
+            res.redirect('/documents');
+        } catch (error) {
+            console.error('Upload error:', error);
+            req.flash('error', 'Falha no upload do documento');
+            res.redirect('/documents');
+        }
+    },
+
+    /**
+     * Compartilha documento com outro usuário
+     */
+    share: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            req.flash('error', errors.array()[0].msg);
+            return res.redirect(`/documents/share/${req.body.documentId}`);
+        }
+
+        try {
+            const { documentId, cpf, canView, canDownload, childrenCPFs } = req.body;
+            
+            const document = await Document.findById(documentId);
+            if (document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
+            await Share.create({
+                documento_id: documentId,
+                cpf_destinatario: cpf,
+                pode_visualizar: canView === 'on',
+                pode_baixar: canDownload === 'on'
+            });
+
+            if (childrenCPFs && childrenCPFs.length > 0) {
+                await createFamilyRule(documentId, childrenCPFs.split(','));
+            }
+
+            req.flash('success', 'Documento compartilhado com sucesso');
+            res.redirect(`/documents/share/${documentId}`);
+        } catch (error) {
+            console.error('Share error:', error);
+            req.flash('error', 'Erro ao compartilhar documento');
+            res.redirect(`/documents/share/${req.body.documentId}`);
+        }
+    },
+
+    /**
+     * Cria regra de liberação para documento
+     */
+    createRule: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            req.flash('error', errors.array()[0].msg);
+            return res.redirect(`/documents/rules/${req.body.documentId}`);
+        }
+
+        try {
+            const { documentId, ruleType, approvers, releaseDate } = req.body;
+            
+            const document = await Document.findById(documentId);
+            if (document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
+            const rule = await ReleaseRule.create({
+                documento_id: documentId,
+                tipo_regra: ruleType,
+                data_liberacao: ruleType === 'DATA' ? new Date(releaseDate) : null,
+                status: 'PENDENTE'
+            });
+
+            if ((ruleType === 'ALGUNS' || ruleType === 'TODOS') && approvers) {
+                const approversList = Array.isArray(approvers) ? approvers : [approvers];
+                await Promise.all(
+                    approversList.map(cpf => ReleaseRule.addApprover(rule.id, cpf))
+                );
+            }
+
+            req.flash('success', 'Regra criada com sucesso');
+            res.redirect(`/documents/rules/${documentId}`);
+        } catch (error) {
+            console.error('CreateRule error:', error);
+            req.flash('error', 'Erro ao criar regra');
+            res.redirect(`/documents/rules/${req.body.documentId}`);
+        }
+    },
+
+    /**
+     * Download de documento com verificações de segurança
+     */
+    download: async (req, res) => {
+        try {
+            const document = await Document.findById(req.params.id);
+            if (!document) {
+                req.flash('error', 'Documento não encontrado');
+                return res.redirect('/documents');
+            }
+
+            // Verifica permissões básicas
+            const isOwner = document.usuario_id === req.session.user.id;
+            const sharedWithMe = await Share.findByUser(req.session.user.cpf);
+            const canAccess = sharedWithMe.some(s => s.documento_id === document.id);
+
+            if (!isOwner && !canAccess) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
+            // Verifica regras de liberação
+            const rules = await ReleaseRule.findByDocument(document.id);
+            if (rules.length > 0) {
+                const allRulesApproved = await Promise.all(rules.map(async (rule) => {
+                    if (rule.status === 'LIBERADO') return true;
+                    
+                    const isApprover = await ReleaseRule.isUserApprover(rule.id, req.session.user.cpf);
+                    const needsMyApproval = isApprover && 
+                                        (rule.tipo_regra === 'TODOS' || 
+                                         rule.tipo_regra === 'ALGUNS');
+                    
+                    if (needsMyApproval) {
+                        const hasApproved = await ReleaseRule.hasUserApproved(rule.id, req.session.user.cpf);
+                        return hasApproved;
+                    }
+                    
+                    return true;
+                }));
+                
+                if (allRulesApproved.includes(false)) {
+                    req.flash('error', 'Documento bloqueado - existem regras de liberação pendentes');
+                    return res.redirect('/documents');
+                }
+            }
+
+            const filePath = path.join(__dirname, '../public', document.caminho_arquivo);
+            
+            if (!fs.existsSync(filePath)) {
+                req.flash('error', 'Arquivo não encontrado no servidor');
+                return res.redirect('/documents');
+            }
+
+            res.download(filePath, document.nome);
+        } catch (error) {
+            console.error('Download error:', error);
+            req.flash('error', 'Erro ao baixar arquivo');
+            res.redirect('/documents');
+        }
+    },
+
+    /**
+     * Exibe formulário de compartilhamento
+     */
+    showShareForm: async (req, res) => {
+        try {
+            const document = await Document.findById(req.params.id);
+            if (!document || document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
+            const shares = await Share.findByDocument(req.params.id);
+            
+            res.render('documents/share', {
+                title: 'Compartilhar Documento',
+                user: req.session.user,
+                document,
+                shares,
+                success: req.flash('success'),
+                error: req.flash('error')
+            });
+        } catch (error) {
+            console.error('ShowShareForm error:', error);
+            req.flash('error', 'Erro ao carregar formulário');
+            res.redirect('/documents');
+        }
+    },
+
+    /**
+     * Exibe formulário de regras de liberação
+     */
+    showRulesForm: async (req, res) => {
+        try {
+            const document = await Document.findById(req.params.id);
+            if (!document || document.usuario_id !== req.session.user.id) {
+                req.flash('error', 'Acesso não autorizado');
+                return res.redirect('/documents');
+            }
+
+            const rules = await ReleaseRule.findByDocument(req.params.id);
+            const approvers = rules.length > 0 ? await ReleaseRule.getApprovers(rules[0].id) : [];
+            
+            res.render('documents/rules', {
+                title: 'Regras de Liberação',
+                user: req.session.user,
+                document,
+                rules,
+                approvers,
+                success: req.flash('success'),
+                error: req.flash('error')
+            });
+        } catch (error) {
+            console.error('ShowRulesForm error:', error);
+            req.flash('error', 'Erro ao carregar formulário');
+            res.redirect('/documents');
+        }
+    },
+
+    /**
+     * Mostra tela de aprovação
+     */
+    showApprovalForm: async (req, res) => {
+        try {
+            const rule = await ReleaseRule.findById(req.params.id);
+            if (!rule) {
+                req.flash('error', 'Regra de liberação não encontrada');
+                return res.redirect('/documents');
+            }
+
+            const document = await Document.findById(rule.documento_id);
+            const owner = await User.findById(document.usuario_id);
+            
+            const isApprover = await ReleaseRule.isUserApprover(rule.id, req.session.user.cpf);
+            if (!isApprover) {
+                req.flash('error', 'Você não tem permissão para aprovar este documento');
+                return res.redirect('/documents');
+            }
+
+            res.render('documents/approval', {
+                title: 'Aprovar Documento',
+                user: req.session.user,
+                document,
+                rule,
+                owner
+            });
+        } catch (error) {
+            console.error('ShowApprovalForm error:', error);
+            req.flash('error', 'Erro ao carregar formulário de aprovação');
+            res.redirect('/documents');
+        }
+    },
+
+    /**
+     * Processa aprovação
+     */
+    approve: async (req, res) => {
+        try {
+            const { ruleId } = req.body;
+            
+            const isApprover = await ReleaseRule.isUserApprover(ruleId, req.session.user.cpf);
+            if (!isApprover) {
+                req.flash('error', 'Você não tem permissão para aprovar este documento');
+                return res.redirect('/documents');
+            }
+
+            await ReleaseRule.approve(ruleId, req.session.user.cpf);
+            
+            const allApproved = await ReleaseRule.checkAllApproved(ruleId);
+            
+            if (allApproved) {
+                await ReleaseRule.updateStatus(ruleId, 'LIBERADO');
+                
+                // Opcional: enviar notificação por e-mail
+                const document = await Document.findById((await ReleaseRule.findById(ruleId)).documento_id);
+                await sendApprovalNotification(ruleId, document);
+            }
+
+            req.flash('success', allApproved 
+                ? 'Documento liberado com sucesso!' 
+                : 'Sua aprovação foi registrada');
+            res.redirect('/documents');
+        } catch (error) {
+            console.error('Approve error:', error);
+            req.flash('error', 'Erro ao processar aprovação');
+            res.redirect('/documents');
+        }
+    },
+
+    
+};
+│   └── mainController.js
+
+├── models/
+│   ├── Document.js
+const pool = require('../config/db');
+
+class Document {
+    static async create({ nome, caminho_arquivo, tamanho, tipo, usuario_id }) {
+        const [result] = await pool.execute(
+            'INSERT INTO documentos (nome, caminho_arquivo, tamanho, tipo, usuario_id) VALUES (?, ?, ?, ?, ?)',
+            [nome, caminho_arquivo, tamanho, tipo, usuario_id]
+        );
+        return result;
+    }
+
+    static async findByUser(usuario_id) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM documentos WHERE usuario_id = ?',
+            [usuario_id]
+        );
+        return rows;
+    }
+
+    static async findById(id) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM documentos WHERE id = ?',
+            [id]
+        );
+        return rows[0];
+    }
+}
+
+module.exports = Document;
+│   ├── ReleaseRule.js
+const pool = require('../config/db');
+
+class ReleaseRule {
+    static async create({ documento_id, tipo_regra, data_liberacao, status }) {
+        const [result] = await pool.execute(
+            'INSERT INTO regras_liberacao (documento_id, tipo_regra, data_liberacao, status) VALUES (?, ?, ?, ?)',
+            [documento_id, tipo_regra, data_liberacao, status]
+        );
+        return result;
+    }
+
+    static async addApprover(regra_id, cpf_aprovador) {
+        const [result] = await pool.execute(
+            'INSERT INTO aprovadores_regras (regra_id, cpf_aprovador) VALUES (?, ?)',
+            [regra_id, cpf_aprovador]
+        );
+        return result;
+    }
+
+    static async findById(id) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM regras_liberacao WHERE id = ?',
+            [id]
+        );
+        return rows[0];
+    }
+
+    static async findByDocument(documento_id) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM regras_liberacao WHERE documento_id = ?',
+            [documento_id]
+        );
+        return rows;
+    }
+
+    /**
+     * Registra aprovação de um usuário
+     */
+    static async approve(ruleId, cpfAprovador) {
+        try {
+            const [result] = await pool.execute(
+                `UPDATE aprovadores_regras 
+                 SET aprovado = TRUE, data_aprovacao = NOW() 
+                 WHERE regra_id = ? AND cpf_aprovador = ?`,
+                [ruleId, cpfAprovador]
+            );
+            
+            // Verifica se todas as aprovações foram concluídas
+            const allApproved = await this.checkAllApproved(ruleId);
+            if (allApproved) {
+                await this.updateStatus(ruleId, 'LIBERADO');
+            }
+            
+            return result.affectedRows > 0;
+        } catch (error) {
+            console.error('Erro ao registrar aprovação:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Verifica se todas as aprovações foram concluídas
+     */
+    static async checkAllApproved(ruleId) {
+        try {
+            // Para regras do tipo DATA, verifica se a data já passou
+            const [rule] = await pool.execute(
+                `SELECT tipo_regra, data_liberacao 
+                 FROM regras_liberacao 
+                 WHERE id = ?`,
+                [ruleId]
+            );
+            
+            if (rule[0]?.tipo_regra === 'DATA') {
+                const now = new Date();
+                const releaseDate = new Date(rule[0].data_liberacao);
+                return now >= releaseDate;
+            }
+
+            // Para regras TODOS/ALGUNS, verifica aprovações
+            const [result] = await pool.execute(
+                `SELECT COUNT(*) as total, SUM(aprovado) as aprovados 
+                 FROM aprovadores_regras 
+                 WHERE regra_id = ?`,
+                [ruleId]
+            );
+            
+            return result[0]?.total === result[0]?.aprovados;
+        } catch (error) {
+            console.error('Erro ao verificar aprovações:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Atualiza status da regra
+     */
+    static async updateStatus(ruleId, status) {
+        try {
+            const [result] = await pool.execute(
+                `UPDATE regras_liberacao 
+                 SET status = ? 
+                 WHERE id = ?`,
+                [status, ruleId]
+            );
+            
+            return result.affectedRows > 0;
+        } catch (error) {
+            console.error('Erro ao atualizar status:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Verifica se um usuário é aprovador de uma regra
+     */
+    static async isUserApprover(ruleId, cpf) {
+        const [rows] = await pool.execute(
+            `SELECT 1 FROM aprovadores_regras 
+            WHERE regra_id = ? AND cpf_aprovador = ?`,
+            [ruleId, cpf]
+        );
+        return rows.length > 0;
+    }
+
+    /**
+     * Verifica se um usuário já aprovou uma regra
+     */
+    static async hasUserApproved(ruleId, cpf) {
+        const [rows] = await pool.execute(
+            `SELECT aprovado FROM aprovadores_regras 
+            WHERE regra_id = ? AND cpf_aprovador = ?`,
+            [ruleId, cpf]
+        );
+        return rows.length > 0 && rows[0].aprovado === 1;
+    }
+
+    /**
+     * Lista todos os aprovadores de uma regra com detalhes
+     */
+    static async getApprovers(ruleId) {
+        const [rows] = await pool.execute(
+            `SELECT u.nome, u.cpf, ar.aprovado, ar.data_aprovacao 
+             FROM aprovadores_regras ar
+             JOIN usuarios u ON ar.cpf_aprovador = u.cpf
+             WHERE ar.regra_id = ?`,
+            [ruleId]
+        );
+        return rows;
+    }
+
+    /**
+     * Verifica se um documento está liberado
+     */
+    static async isDocumentReleased(documento_id) {
+        const [rows] = await pool.execute(
+            `SELECT status FROM regras_liberacao 
+             WHERE documento_id = ?`,
+            [documento_id]
+        );
+        
+        return rows.some(rule => rule.status === 'LIBERADO');
+    }
+}
+
+module.exports = ReleaseRule;
+│   ├── Share.js
+const pool = require('../config/db');
+
+class Share {
+    static async create({ documento_id, cpf_destinatario, pode_visualizar, pode_baixar }) {
+        const [result] = await pool.execute(
+            'INSERT INTO compartilhamentos (documento_id, cpf_destinatario, pode_visualizar, pode_baixar) VALUES (?, ?, ?, ?)',
+            [documento_id, cpf_destinatario, pode_visualizar, pode_baixar]
+        );
+        return result;
+    }
+
+    static async findByUser(cpf) {
+        const [rows] = await pool.execute(
+            `SELECT 
+                c.*, 
+                d.nome as documento_nome, 
+                u.nome as usuario_nome, 
+                r.status as regra_status, 
+                r.id as regra_id, 
+                r.tipo_regra,
+                r.data_liberacao,
+                (SELECT COUNT(*) FROM aprovadores_regras ar 
+                 WHERE ar.regra_id = r.id AND ar.cpf_aprovador = ? AND ar.aprovado = 0) as precisa_minha_aprovacao,
+                (SELECT COUNT(*) FROM aprovadores_regras ar 
+                 WHERE ar.regra_id = r.id) as total_aprovadores,
+                (SELECT COUNT(*) FROM aprovadores_regras ar 
+                 WHERE ar.regra_id = r.id AND ar.aprovado = 1) as aprovadores_confirmados
+             FROM compartilhamentos c
+             JOIN documentos d ON c.documento_id = d.id
+             JOIN usuarios u ON d.usuario_id = u.id
+             LEFT JOIN regras_liberacao r ON r.documento_id = d.id
+             WHERE c.cpf_destinatario = ?`,
+            [cpf, cpf]
+        );
+        return rows;
+    }
+
+    static async findByDocument(documento_id) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM compartilhamentos WHERE documento_id = ?',
+            [documento_id]
+        );
+        return rows;
+    }
+
+    static async checkPermission(documento_id, cpf, action) {
+        // Primeiro verifica se o documento está liberado
+        const [releaseRules] = await pool.execute(
+            'SELECT status FROM regras_liberacao WHERE documento_id = ?',
+            [documento_id]
+        );
+
+        // Se existir regra e não estiver liberado, nega a permissão
+        if (releaseRules.length > 0 && releaseRules[0].status !== 'LIBERADO') {
+            return false;
+        }
+
+        // Verifica a permissão específica no compartilhamento
+        const [rows] = await pool.execute(
+            `SELECT pode_${action === 'download' ? 'baixar' : 'visualizar'} as permissao 
+             FROM compartilhamentos 
+             WHERE documento_id = ? AND cpf_destinatario = ?`,
+            [documento_id, cpf]
+        );
+        return rows.length > 0 && rows[0].permissao;
+    }
+
+    static async delete(documento_id, cpf_destinatario) {
+        const [result] = await pool.execute(
+            'DELETE FROM compartilhamentos WHERE documento_id = ? AND cpf_destinatario = ?',
+            [documento_id, cpf_destinatario]
+        );
+        return result;
+    }
+
+    static async deleteByDocument(documento_id) {
+        const [result] = await pool.execute(
+            'DELETE FROM compartilhamentos WHERE documento_id = ?',
+            [documento_id]
+        );
+        return result;
+    }
+
+    static async deleteByCpf(cpf_destinatario) {
+        const [result] = await pool.execute(
+            'DELETE FROM compartilhamentos WHERE cpf_destinatario = ?',
+            [cpf_destinatario]
+        );
+        return result;
+    }
+
+    static async deleteByDocumentAndCpf(documento_id, cpf_destinatario) {
+        const [result] = await pool.execute(
+            'DELETE FROM compartilhamentos WHERE documento_id = ? AND cpf_destinatario = ?',
+            [documento_id, cpf_destinatario]
+        );
+        return result;
+    }
+
+    static async update(documento_id, cpf_destinatario, updates) {
+        const fields = Object.keys(updates).map(key => `${key} = ?`).join(', ');
+        const values = Object.values(updates);
+        values.push(documento_id, cpf_destinatario);
+        
+        const [result] = await pool.execute(
+            `UPDATE compartilhamentos SET ${fields} WHERE documento_id = ? AND cpf_destinatario = ?`,
+            values
+        );
+        return result;
+    }
+
+    static async findByCpf(cpf_destinatario) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM compartilhamentos WHERE cpf_destinatario = ?',
+            [cpf_destinatario]
+        );
+        return rows;
+    }
+
+    static async findByDocumentAndCpf(documento_id, cpf_destinatario) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM compartilhamentos WHERE documento_id = ? AND cpf_destinatario = ?',
+            [documento_id, cpf_destinatario]
+        );
+        return rows;
+    }
+
+    static async findByDocumentAndCpfWithUser(documento_id, cpf_destinatario) {
+        const [rows] = await pool.execute(
+            `SELECT c.*, d.nome as documento_nome, u.nome as usuario_nome 
+             FROM compartilhamentos c
+             JOIN documentos d ON c.documento_id = d.id
+             JOIN usuarios u ON d.usuario_id = u.id
+             WHERE c.documento_id = ? AND c.cpf_destinatario = ?`,
+            [documento_id, cpf_destinatario]
+        );
+        return rows; 
+    }
+
+    /**
+     * Busca documentos pendentes de aprovação pelo usuário
+     */
+    static async findPendingApprovals(cpfAprovador) {
+        const [rows] = await pool.execute(
+            `SELECT 
+                d.id as documento_id,
+                d.nome as documento_nome,
+                u.nome as dono_nome,
+                r.id as regra_id,
+                r.tipo_regra,
+                (SELECT COUNT(*) FROM aprovadores_regras ar 
+                 WHERE ar.regra_id = r.id AND ar.aprovado = 1) as aprovados,
+                (SELECT COUNT(*) FROM aprovadores_regras ar 
+                 WHERE ar.regra_id = r.id) as total_aprovadores
+             FROM aprovadores_regras ar
+             JOIN regras_liberacao r ON ar.regra_id = r.id
+             JOIN documentos d ON r.documento_id = d.id
+             JOIN usuarios u ON d.usuario_id = u.id
+             WHERE ar.cpf_aprovador = ? AND ar.aprovado = 0
+             AND r.status = 'PENDENTE'`,
+            [cpfAprovador]
+        );
+        return rows;
+    }
+}
+
+module.exports = Share;
+│   └── User.js
+const pool = require('../config/db');
+
+class User {
+    static async create({ nome, email, cpf, senha }) {
+        const [result] = await pool.execute(
+            'INSERT INTO usuarios (nome, email, cpf, senha) VALUES (?, ?, ?, ?)',
+            [nome, email, cpf, senha]
+        );
+        return result;
+    }
+
+    static async findByEmail(email) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM usuarios WHERE email = ?',
+            [email]
+        );
+        return rows[0];
+    }
+
+    static async findByCpf(cpf) {
+        const [rows] = await pool.execute(
+            'SELECT * FROM usuarios WHERE cpf = ?',
+            [cpf]
+        );
+        return rows[0];
+    }
+}
+
+module.exports = User;
+├── config/
+│   ├── db.js
+const mysql = require('mysql2/promise');
+
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'cofre',
+    password: '@Cofre2025',
+    database: 'cofreonline',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+//mysql -u cofre -p'@Cofre2025'
+
+module.exports = pool;
+│   └── session.js
+
+|   └── multer.js
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../public/uploads'));
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 } // 10MB
+});
+
+module.exports = upload;
+├── app.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const path = require('path');
+const flash = require('connect-flash'); // Adicionado
+
+// Configuração do app
+const app = express();
+
+// Configuração da view engine (EJS)
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Middlewares
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Configuração de sessão (simplificada)
+app.use(session({
+    secret: 'seuSegredoSuperSecreto',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { 
+        secure: false, // Defina como true em produção com HTTPS
+        maxAge: 24 * 60 * 60 * 1000 // 1 dia
+    }
+}));
+
+// Configuração do flash messages (DEVE vir após a sessão)
+app.use(flash());
+
+// Middleware para definir variáveis padrão para todas as views
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
+    next();
+});
+
+// Rotas
+app.use('/', require('./routes/mainRoutes'));
+app.use('/auth', require('./routes/authRoutes'));
+app.use('/documents', require('./routes/documents'));
+
+// Middleware de erro 404
+app.use((req, res, next) => {
+    res.status(404).render('error', {
+        title: 'Página não encontrada',
+        message: 'A página que você está procurando não existe.'
+    });
+});
+
+// Middleware de tratamento de erros
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).render('error', {
+        title: 'Erro no servidor',
+        message: 'Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.'
+    });
+});
+
+// Inicialização do servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+├── package.json
+{
+  "name": "cofreonline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "mysql2": "^3.14.1",
+    "nodemailer": "^7.0.5"
+  }
+}
+├── Package-lock.json
+{
+  "name": "cofreonline",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "cofreonline",
+      "version": "1.0.0",
+      "license": "ISC",
+      "dependencies": {
+        "bcryptjs": "^3.0.2",
+        "body-parser": "^2.2.0",
+        "connect-flash": "^0.1.1",
+        "ejs": "^3.1.10",
+        "express": "^5.1.0",
+        "express-flash": "^0.0.2",
+        "express-session": "^1.18.1",
+        "express-validator": "^7.2.1",
+        "mysql2": "^3.14.1",
+        "nodemailer": "^7.0.5"
+      }
+    },
+    "node_modules/accepts": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/accepts/-/accepts-2.0.0.tgz",
+      "integrity": "sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==",
+      "license": "MIT",
+      "dependencies": {
+        "mime-types": "^3.0.0",
+        "negotiator": "^1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/ansi-styles": {
+      "version": "4.3.0",
+      "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz",
+      "integrity": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==",
+      "license": "MIT",
+      "dependencies": {
+        "color-convert": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/ansi-styles?sponsor=1"
+      }
+    },
+    "node_modules/async": {
+      "version": "3.2.6",
+      "resolved": "https://registry.npmjs.org/async/-/async-3.2.6.tgz",
+      "integrity": "sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==",
+      "license": "MIT"
+    },
+    "node_modules/aws-ssl-profiles": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/aws-ssl-profiles/-/aws-ssl-profiles-1.1.2.tgz",
+      "integrity": "sha512-NZKeq9AfyQvEeNlN0zSYAaWrmBffJh3IELMZfRpJVWgrpEbtEpnjvzqBPf+mxoI287JohRDoa+/nsfqqiZmF6g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 6.0.0"
+      }
+    },
+    "node_modules/balanced-match": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz",
+      "integrity": "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==",
+      "license": "MIT"
+    },
+    "node_modules/bcryptjs": {
+      "version": "3.0.2",
+      "resolved": "https://registry.npmjs.org/bcryptjs/-/bcryptjs-3.0.2.tgz",
+      "integrity": "sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog==",
+      "license": "BSD-3-Clause",
+      "bin": {
+        "bcrypt": "bin/bcrypt"
+      }
+    },
+    "node_modules/body-parser": {
+      "version": "2.2.0",
+      "resolved": "https://registry.npmjs.org/body-parser/-/body-parser-2.2.0.tgz",
+      "integrity": "sha512-02qvAaxv8tp7fBa/mw1ga98OGm+eCbqzJOKoRt70sLmfEEi+jyBYVTDGfCL/k06/4EMk/z01gCe7HoCH/f2LTg==",
+      "license": "MIT",
+      "dependencies": {
+        "bytes": "^3.1.2",
+        "content-type": "^1.0.5",
+        "debug": "^4.4.0",
+        "http-errors": "^2.0.0",
+        "iconv-lite": "^0.6.3",
+        "on-finished": "^2.4.1",
+        "qs": "^6.14.0",
+        "raw-body": "^3.0.0",
+        "type-is": "^2.0.0"
+      },
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/brace-expansion": {
+      "version": "1.1.11",
+      "resolved": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.11.tgz",
+      "integrity": "sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^1.0.0",
+        "concat-map": "0.0.1"
+      }
+    },
+    "node_modules/bytes": {
+      "version": "3.1.2",
+      "resolved": "https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz",
+      "integrity": "sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/call-bind-apply-helpers": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz",
+      "integrity": "sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "function-bind": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/call-bound": {
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.2",
+        "get-intrinsic": "^1.3.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/chalk": {
+      "version": "4.1.2",
+      "resolved": "https://registry.npmjs.org/chalk/-/chalk-4.1.2.tgz",
+      "integrity": "sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-styles": "^4.1.0",
+        "supports-color": "^7.1.0"
+      },
+      "engines": {
+        "node": ">=10"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/chalk?sponsor=1"
+      }
+    },
+    "node_modules/color-convert": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
+      "integrity": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==",
+      "license": "MIT",
+      "dependencies": {
+        "color-name": "~1.1.4"
+      },
+      "engines": {
+        "node": ">=7.0.0"
+      }
+    },
+    "node_modules/color-name": {
+      "version": "1.1.4",
+      "resolved": "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz",
+      "integrity": "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==",
+      "license": "MIT"
+    },
+    "node_modules/concat-map": {
+      "version": "0.0.1",
+      "resolved": "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz",
+      "integrity": "sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==",
+      "license": "MIT"
+    },
+    "node_modules/connect-flash": {
+      "version": "0.1.1",
+      "resolved": "https://registry.npmjs.org/connect-flash/-/connect-flash-0.1.1.tgz",
+      "integrity": "sha512-2rcfELQt/ZMP+SM/pG8PyhJRaLKp+6Hk2IUBNkEit09X+vwn3QsAL3ZbYtxUn7NVPzbMTSLRDhqe0B/eh30RYA==",
+      "engines": {
+        "node": ">= 0.4.0"
+      }
+    },
+    "node_modules/content-disposition": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/content-disposition/-/content-disposition-1.0.0.tgz",
+      "integrity": "sha512-Au9nRL8VNUut/XSzbQA38+M78dzP4D+eqg3gfJHMIHHYa3bg067xj1KxMUWj+VULbiZMowKngFFbKczUrNJ1mg==",
+      "license": "MIT",
+      "dependencies": {
+        "safe-buffer": "5.2.1"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/content-type": {
+      "version": "1.0.5",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz",
+      "integrity": "sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/cookie": {
+      "version": "0.7.2",
+      "resolved": "https://registry.npmjs.org/cookie/-/cookie-0.7.2.tgz",
+      "integrity": "sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/cookie-signature": {
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.2.2.tgz",
+      "integrity": "sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.6.0"
+      }
+    },
+    "node_modules/debug": {
+      "version": "4.4.1",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-4.4.1.tgz",
+      "integrity": "sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==",
+      "license": "MIT",
+      "dependencies": {
+        "ms": "^2.1.3"
+      },
+      "engines": {
+        "node": ">=6.0"
+      },
+      "peerDependenciesMeta": {
+        "supports-color": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/denque": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/denque/-/denque-2.1.0.tgz",
+      "integrity": "sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=0.10"
+      }
+    },
+    "node_modules/depd": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz",
+      "integrity": "sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/dunder-proto": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/dunder-proto/-/dunder-proto-1.0.1.tgz",
+      "integrity": "sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.1",
+        "es-errors": "^1.3.0",
+        "gopd": "^1.2.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/ee-first": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz",
+      "integrity": "sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==",
+      "license": "MIT"
+    },
+    "node_modules/ejs": {
+      "version": "3.1.10",
+      "resolved": "https://registry.npmjs.org/ejs/-/ejs-3.1.10.tgz",
+      "integrity": "sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "jake": "^10.8.5"
+      },
+      "bin": {
+        "ejs": "bin/cli.js"
+      },
+      "engines": {
+        "node": ">=0.10.0"
+      }
+    },
+    "node_modules/encodeurl": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz",
+      "integrity": "sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/es-define-property": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.1.tgz",
+      "integrity": "sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/es-errors": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz",
+      "integrity": "sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/es-object-atoms": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/es-object-atoms/-/es-object-atoms-1.1.1.tgz",
+      "integrity": "sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/escape-html": {
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz",
+      "integrity": "sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==",
+      "license": "MIT"
+    },
+    "node_modules/etag": {
+      "version": "1.8.1",
+      "resolved": "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz",
+      "integrity": "sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/express": {
+      "version": "5.1.0",
+      "resolved": "https://registry.npmjs.org/express/-/express-5.1.0.tgz",
+      "integrity": "sha512-DT9ck5YIRU+8GYzzU5kT3eHGA5iL+1Zd0EutOmTE9Dtk+Tvuzd23VBU+ec7HPNSTxXYO55gPV/hq4pSBJDjFpA==",
+      "license": "MIT",
+      "dependencies": {
+        "accepts": "^2.0.0",
+        "body-parser": "^2.2.0",
+        "content-disposition": "^1.0.0",
+        "content-type": "^1.0.5",
+        "cookie": "^0.7.1",
+        "cookie-signature": "^1.2.1",
+        "debug": "^4.4.0",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "etag": "^1.8.1",
+        "finalhandler": "^2.1.0",
+        "fresh": "^2.0.0",
+        "http-errors": "^2.0.0",
+        "merge-descriptors": "^2.0.0",
+        "mime-types": "^3.0.0",
+        "on-finished": "^2.4.1",
+        "once": "^1.4.0",
+        "parseurl": "^1.3.3",
+        "proxy-addr": "^2.0.7",
+        "qs": "^6.14.0",
+        "range-parser": "^1.2.1",
+        "router": "^2.2.0",
+        "send": "^1.1.0",
+        "serve-static": "^2.2.0",
+        "statuses": "^2.0.1",
+        "type-is": "^2.0.1",
+        "vary": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/express-flash": {
+      "version": "0.0.2",
+      "resolved": "https://registry.npmjs.org/express-flash/-/express-flash-0.0.2.tgz",
+      "integrity": "sha512-QVUR0ZZRCaa8+iPHoUQaQJrQWcQuK/Q+19M7IUIdIEtvwhrA/ifHT7y1CVJI41YfGiOQnbGtn3uvd2vOdgu58A==",
+      "dependencies": {
+        "connect-flash": "0.1.x"
+      },
+      "engines": {
+        "node": ">= 0.8.0"
+      }
+    },
+    "node_modules/express-session": {
+      "version": "1.18.1",
+      "resolved": "https://registry.npmjs.org/express-session/-/express-session-1.18.1.tgz",
+      "integrity": "sha512-a5mtTqEaZvBCL9A9aqkrtfz+3SMDhOVUnjafjo+s7A9Txkq+SVX2DLvSp1Zrv4uCXa3lMSK3viWnh9Gg07PBUA==",
+      "license": "MIT",
+      "dependencies": {
+        "cookie": "0.7.2",
+        "cookie-signature": "1.0.7",
+        "debug": "2.6.9",
+        "depd": "~2.0.0",
+        "on-headers": "~1.0.2",
+        "parseurl": "~1.3.3",
+        "safe-buffer": "5.2.1",
+        "uid-safe": "~2.1.5"
+      },
+      "engines": {
+        "node": ">= 0.8.0"
+      }
+    },
+    "node_modules/express-session/node_modules/cookie-signature": {
+      "version": "1.0.7",
+      "resolved": "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.7.tgz",
+      "integrity": "sha512-NXdYc3dLr47pBkpUCHtKSwIOQXLVn8dZEuywboCOJY/osA0wFSLlSawr3KN8qXJEyX66FcONTH8EIlVuK0yyFA==",
+      "license": "MIT"
+    },
+    "node_modules/express-session/node_modules/debug": {
+      "version": "2.6.9",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz",
+      "integrity": "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==",
+      "license": "MIT",
+      "dependencies": {
+        "ms": "2.0.0"
+      }
+    },
+    "node_modules/express-session/node_modules/ms": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz",
+      "integrity": "sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==",
+      "license": "MIT"
+    },
+    "node_modules/express-validator": {
+      "version": "7.2.1",
+      "resolved": "https://registry.npmjs.org/express-validator/-/express-validator-7.2.1.tgz",
+      "integrity": "sha512-CjNE6aakfpuwGaHQZ3m8ltCG2Qvivd7RHtVMS/6nVxOM7xVGqr4bhflsm4+N5FP5zI7Zxp+Hae+9RE+o8e3ZOQ==",
+      "license": "MIT",
+      "dependencies": {
+        "lodash": "^4.17.21",
+        "validator": "~13.12.0"
+      },
+      "engines": {
+        "node": ">= 8.0.0"
+      }
+    },
+    "node_modules/filelist": {
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/filelist/-/filelist-1.0.4.tgz",
+      "integrity": "sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "minimatch": "^5.0.1"
+      }
+    },
+    "node_modules/filelist/node_modules/brace-expansion": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.0.1.tgz",
+      "integrity": "sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^1.0.0"
+      }
+    },
+    "node_modules/filelist/node_modules/minimatch": {
+      "version": "5.1.6",
+      "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-5.1.6.tgz",
+      "integrity": "sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==",
+      "license": "ISC",
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/finalhandler": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/finalhandler/-/finalhandler-2.1.0.tgz",
+      "integrity": "sha512-/t88Ty3d5JWQbWYgaOGCCYfXRwV1+be02WqYYlL6h0lEiUAMPM8o8qKGO01YIkOHzka2up08wvgYD0mDiI+q3Q==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.0",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "on-finished": "^2.4.1",
+        "parseurl": "^1.3.3",
+        "statuses": "^2.0.1"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/forwarded": {
+      "version": "0.2.0",
+      "resolved": "https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz",
+      "integrity": "sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/fresh": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/fresh/-/fresh-2.0.0.tgz",
+      "integrity": "sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/function-bind": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz",
+      "integrity": "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==",
+      "license": "MIT",
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/generate-function": {
+      "version": "2.3.1",
+      "resolved": "https://registry.npmjs.org/generate-function/-/generate-function-2.3.1.tgz",
+      "integrity": "sha512-eeB5GfMNeevm/GRYq20ShmsaGcmI81kIX2K9XQx5miC8KdHaC6Jm0qQ8ZNeGOi7wYB8OsdxKs+Y2oVuTFuVwKQ==",
+      "license": "MIT",
+      "dependencies": {
+        "is-property": "^1.0.2"
+      }
+    },
+    "node_modules/get-intrinsic": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.2",
+        "es-define-property": "^1.0.1",
+        "es-errors": "^1.3.0",
+        "es-object-atoms": "^1.1.1",
+        "function-bind": "^1.1.2",
+        "get-proto": "^1.0.1",
+        "gopd": "^1.2.0",
+        "has-symbols": "^1.1.0",
+        "hasown": "^2.0.2",
+        "math-intrinsics": "^1.1.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/get-proto": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/get-proto/-/get-proto-1.0.1.tgz",
+      "integrity": "sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==",
+      "license": "MIT",
+      "dependencies": {
+        "dunder-proto": "^1.0.1",
+        "es-object-atoms": "^1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/gopd": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/gopd/-/gopd-1.2.0.tgz",
+      "integrity": "sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/has-flag": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/has-flag/-/has-flag-4.0.0.tgz",
+      "integrity": "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/has-symbols": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/has-symbols/-/has-symbols-1.1.0.tgz",
+      "integrity": "sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/hasown": {
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/hasown/-/hasown-2.0.2.tgz",
+      "integrity": "sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==",
+      "license": "MIT",
+      "dependencies": {
+        "function-bind": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/http-errors": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-2.0.0.tgz",
+      "integrity": "sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==",
+      "license": "MIT",
+      "dependencies": {
+        "depd": "2.0.0",
+        "inherits": "2.0.4",
+        "setprototypeof": "1.2.0",
+        "statuses": "2.0.1",
+        "toidentifier": "1.0.1"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/http-errors/node_modules/statuses": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/statuses/-/statuses-2.0.1.tgz",
+      "integrity": "sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/iconv-lite": {
+      "version": "0.6.3",
+      "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz",
+      "integrity": "sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==",
+      "license": "MIT",
+      "dependencies": {
+        "safer-buffer": ">= 2.1.2 < 3.0.0"
+      },
+      "engines": {
+        "node": ">=0.10.0"
+      }
+    },
+    "node_modules/inherits": {
+      "version": "2.0.4",
+      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz",
+      "integrity": "sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==",
+      "license": "ISC"
+    },
+    "node_modules/ipaddr.js": {
+      "version": "1.9.1",
+      "resolved": "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.1.tgz",
+      "integrity": "sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.10"
+      }
+    },
+    "node_modules/is-promise": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/is-promise/-/is-promise-4.0.0.tgz",
+      "integrity": "sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==",
+      "license": "MIT"
+    },
+    "node_modules/is-property": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/is-property/-/is-property-1.0.2.tgz",
+      "integrity": "sha512-Ks/IoX00TtClbGQr4TWXemAnktAQvYB7HzcCxDGqEZU6oCmb2INHuOoKxbtR+HFkmYWBKv/dOZtGRiAjDhj92g==",
+      "license": "MIT"
+    },
+    "node_modules/jake": {
+      "version": "10.9.2",
+      "resolved": "https://registry.npmjs.org/jake/-/jake-10.9.2.tgz",
+      "integrity": "sha512-2P4SQ0HrLQ+fw6llpLnOaGAvN2Zu6778SJMrCUwns4fOoG9ayrTiZk3VV8sCPkVZF8ab0zksVpS8FDY5pRCNBA==",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "async": "^3.2.3",
+        "chalk": "^4.0.2",
+        "filelist": "^1.0.4",
+        "minimatch": "^3.1.2"
+      },
+      "bin": {
+        "jake": "bin/cli.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/lodash": {
+      "version": "4.17.21",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
+      "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==",
+      "license": "MIT"
+    },
+    "node_modules/long": {
+      "version": "5.3.2",
+      "resolved": "https://registry.npmjs.org/long/-/long-5.3.2.tgz",
+      "integrity": "sha512-mNAgZ1GmyNhD7AuqnTG3/VQ26o760+ZYBPKjPvugO8+nLbYfX6TVpJPseBvopbdY+qpZ/lKUnmEc1LeZYS3QAA==",
+      "license": "Apache-2.0"
+    },
+    "node_modules/lru-cache": {
+      "version": "7.18.3",
+      "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-7.18.3.tgz",
+      "integrity": "sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==",
+      "license": "ISC",
+      "engines": {
+        "node": ">=12"
+      }
+    },
+    "node_modules/lru.min": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/lru.min/-/lru.min-1.1.2.tgz",
+      "integrity": "sha512-Nv9KddBcQSlQopmBHXSsZVY5xsdlZkdH/Iey0BlcBYggMd4two7cZnKOK9vmy3nY0O5RGH99z1PCeTpPqszUYg==",
+      "license": "MIT",
+      "engines": {
+        "bun": ">=1.0.0",
+        "deno": ">=1.30.0",
+        "node": ">=8.0.0"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/wellwelwel"
+      }
+    },
+    "node_modules/math-intrinsics": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz",
+      "integrity": "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/media-typer": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/media-typer/-/media-typer-1.1.0.tgz",
+      "integrity": "sha512-aisnrDP4GNe06UcKFnV5bfMNPBUw4jsLGaWwWfnH3v02GnBuXX2MCVn5RbrWo0j3pczUilYblq7fQ7Nw2t5XKw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/merge-descriptors": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-2.0.0.tgz",
+      "integrity": "sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
+    "node_modules/mime-db": {
+      "version": "1.54.0",
+      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.54.0.tgz",
+      "integrity": "sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/mime-types": {
+      "version": "3.0.1",
+      "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-3.0.1.tgz",
+      "integrity": "sha512-xRc4oEhT6eaBpU1XF7AjpOFD+xQmXNB5OVKwp4tqCuBpHLS/ZbBDrc07mYTDqVMg6PfxUjjNp85O6Cd2Z/5HWA==",
+      "license": "MIT",
+      "dependencies": {
+        "mime-db": "^1.54.0"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/minimatch": {
+      "version": "3.1.2",
+      "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz",
+      "integrity": "sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==",
+      "license": "ISC",
+      "dependencies": {
+        "brace-expansion": "^1.1.7"
+      },
+      "engines": {
+        "node": "*"
+      }
+    },
+    "node_modules/ms": {
+      "version": "2.1.3",
+      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==",
+      "license": "MIT"
+    },
+    "node_modules/mysql2": {
+      "version": "3.14.1",
+      "resolved": "https://registry.npmjs.org/mysql2/-/mysql2-3.14.1.tgz",
+      "integrity": "sha512-7ytuPQJjQB8TNAYX/H2yhL+iQOnIBjAMam361R7UAL0lOVXWjtdrmoL9HYKqKoLp/8UUTRcvo1QPvK9KL7wA8w==",
+      "license": "MIT",
+      "dependencies": {
+        "aws-ssl-profiles": "^1.1.1",
+        "denque": "^2.1.0",
+        "generate-function": "^2.3.1",
+        "iconv-lite": "^0.6.3",
+        "long": "^5.2.1",
+        "lru.min": "^1.0.0",
+        "named-placeholders": "^1.1.3",
+        "seq-queue": "^0.0.5",
+        "sqlstring": "^2.3.2"
+      },
+      "engines": {
+        "node": ">= 8.0"
+      }
+    },
+    "node_modules/named-placeholders": {
+      "version": "1.1.3",
+      "resolved": "https://registry.npmjs.org/named-placeholders/-/named-placeholders-1.1.3.tgz",
+      "integrity": "sha512-eLoBxg6wE/rZkJPhU/xRX1WTpkFEwDJEN96oxFrTsqBdbT5ec295Q+CoHrL9IT0DipqKhmGcaZmwOt8OON5x1w==",
+      "license": "MIT",
+      "dependencies": {
+        "lru-cache": "^7.14.1"
+      },
+      "engines": {
+        "node": ">=12.0.0"
+      }
+    },
+    "node_modules/negotiator": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-1.0.0.tgz",
+      "integrity": "sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/nodemailer": {
+      "version": "7.0.5",
+      "resolved": "https://registry.npmjs.org/nodemailer/-/nodemailer-7.0.5.tgz",
+      "integrity": "sha512-nsrh2lO3j4GkLLXoeEksAMgAOqxOv6QumNRVQTJwKH4nuiww6iC2y7GyANs9kRAxCexg3+lTWM3PZ91iLlVjfg==",
+      "license": "MIT-0",
+      "engines": {
+        "node": ">=6.0.0"
+      }
+    },
+    "node_modules/object-inspect": {
+      "version": "1.13.4",
+      "resolved": "https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz",
+      "integrity": "sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/on-finished": {
+      "version": "2.4.1",
+      "resolved": "https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz",
+      "integrity": "sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==",
+      "license": "MIT",
+      "dependencies": {
+        "ee-first": "1.1.1"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/on-headers": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.2.tgz",
+      "integrity": "sha512-pZAE+FJLoyITytdqK0U5s+FIpjN0JP3OzFi/u8Rx+EV5/W+JTWGXG8xFzevE7AjBfDqHv/8vL8qQsIhHnqRkrA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/once": {
+      "version": "1.4.0",
+      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+      "integrity": "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==",
+      "license": "ISC",
+      "dependencies": {
+        "wrappy": "1"
+      }
+    },
+    "node_modules/parseurl": {
+      "version": "1.3.3",
+      "resolved": "https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz",
+      "integrity": "sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/path-to-regexp": {
+      "version": "8.2.0",
+      "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-8.2.0.tgz",
+      "integrity": "sha512-TdrF7fW9Rphjq4RjrW0Kp2AW0Ahwu9sRGTkS6bvDi0SCwZlEZYmcfDbEsTz8RVk0EHIS/Vd1bv3JhG+1xZuAyQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=16"
+      }
+    },
+    "node_modules/proxy-addr": {
+      "version": "2.0.7",
+      "resolved": "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.7.tgz",
+      "integrity": "sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==",
+      "license": "MIT",
+      "dependencies": {
+        "forwarded": "0.2.0",
+        "ipaddr.js": "1.9.1"
+      },
+      "engines": {
+        "node": ">= 0.10"
+      }
+    },
+    "node_modules/qs": {
+      "version": "6.14.0",
+      "resolved": "https://registry.npmjs.org/qs/-/qs-6.14.0.tgz",
+      "integrity": "sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==",
+      "license": "BSD-3-Clause",
+      "dependencies": {
+        "side-channel": "^1.1.0"
+      },
+      "engines": {
+        "node": ">=0.6"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/random-bytes": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/random-bytes/-/random-bytes-1.0.0.tgz",
+      "integrity": "sha512-iv7LhNVO047HzYR3InF6pUcUsPQiHTM1Qal51DcGSuZFBil1aBBWG5eHPNek7bvILMaYJ/8RU1e8w1AMdHmLQQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/range-parser": {
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz",
+      "integrity": "sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/raw-body": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-3.0.0.tgz",
+      "integrity": "sha512-RmkhL8CAyCRPXCE28MMH0z2PNWQBNk2Q09ZdxM9IOOXwxwZbN+qbWaatPkdkWIKL2ZVDImrN/pK5HTRz2PcS4g==",
+      "license": "MIT",
+      "dependencies": {
+        "bytes": "3.1.2",
+        "http-errors": "2.0.0",
+        "iconv-lite": "0.6.3",
+        "unpipe": "1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/router": {
+      "version": "2.2.0",
+      "resolved": "https://registry.npmjs.org/router/-/router-2.2.0.tgz",
+      "integrity": "sha512-nLTrUKm2UyiL7rlhapu/Zl45FwNgkZGaCpZbIHajDYgwlJCOzLSk+cIPAnsEqV955GjILJnKbdQC1nVPz+gAYQ==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.0",
+        "depd": "^2.0.0",
+        "is-promise": "^4.0.0",
+        "parseurl": "^1.3.3",
+        "path-to-regexp": "^8.0.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      }
+    },
+    "node_modules/safe-buffer": {
+      "version": "5.2.1",
+      "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz",
+      "integrity": "sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==",
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/feross"
+        },
+        {
+          "type": "patreon",
+          "url": "https://www.patreon.com/feross"
+        },
+        {
+          "type": "consulting",
+          "url": "https://feross.org/support"
+        }
+      ],
+      "license": "MIT"
+    },
+    "node_modules/safer-buffer": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz",
+      "integrity": "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==",
+      "license": "MIT"
+    },
+    "node_modules/send": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/send/-/send-1.2.0.tgz",
+      "integrity": "sha512-uaW0WwXKpL9blXE2o0bRhoL2EGXIrZxQ2ZQ4mgcfoBxdFmQold+qWsD2jLrfZ0trjKL6vOw0j//eAwcALFjKSw==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.3.5",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "etag": "^1.8.1",
+        "fresh": "^2.0.0",
+        "http-errors": "^2.0.0",
+        "mime-types": "^3.0.1",
+        "ms": "^2.1.3",
+        "on-finished": "^2.4.1",
+        "range-parser": "^1.2.1",
+        "statuses": "^2.0.1"
+      },
+      "engines": {
+        "node": ">= 18"
+      }
+    },
+    "node_modules/seq-queue": {
+      "version": "0.0.5",
+      "resolved": "https://registry.npmjs.org/seq-queue/-/seq-queue-0.0.5.tgz",
+      "integrity": "sha512-hr3Wtp/GZIc/6DAGPDcV4/9WoZhjrkXsi5B/07QgX8tsdc6ilr7BFM6PM6rbdAX1kFSDYeZGLipIZZKyQP0O5Q=="
+    },
+    "node_modules/serve-static": {
+      "version": "2.2.0",
+      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-2.2.0.tgz",
+      "integrity": "sha512-61g9pCh0Vnh7IutZjtLGGpTA355+OPn2TyDv/6ivP2h/AdAVX9azsoxmg2/M6nZeQZNYBEwIcsne1mJd9oQItQ==",
+      "license": "MIT",
+      "dependencies": {
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "parseurl": "^1.3.3",
+        "send": "^1.2.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      }
+    },
+    "node_modules/setprototypeof": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz",
+      "integrity": "sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==",
+      "license": "ISC"
+    },
+    "node_modules/side-channel": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/side-channel/-/side-channel-1.1.0.tgz",
+      "integrity": "sha512-ZX99e6tRweoUXqR+VBrslhda51Nh5MTQwou5tnUDgbtyM0dBgmhEDtWGP/xbKn6hqfPRHujUNwz5fy/wbbhnpw==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "object-inspect": "^1.13.3",
+        "side-channel-list": "^1.0.0",
+        "side-channel-map": "^1.0.1",
+        "side-channel-weakmap": "^1.0.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-list": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.0.tgz",
+      "integrity": "sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "object-inspect": "^1.13.3"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-map": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz",
+      "integrity": "sha512-VCjCNfgMsby3tTdo02nbjtM/ewra6jPHmpThenkTYh8pG9ucZ/1P8So4u4FGBek/BjpOVsDCMoLA/iuBKIFXRA==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bound": "^1.0.2",
+        "es-errors": "^1.3.0",
+        "get-intrinsic": "^1.2.5",
+        "object-inspect": "^1.13.3"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-weakmap": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz",
+      "integrity": "sha512-WPS/HvHQTYnHisLo9McqBHOJk2FkHO/tlpvldyrnem4aeQp4hai3gythswg6p01oSoTl58rcpiFAjF2br2Ak2A==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bound": "^1.0.2",
+        "es-errors": "^1.3.0",
+        "get-intrinsic": "^1.2.5",
+        "object-inspect": "^1.13.3",
+        "side-channel-map": "^1.0.1"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/sqlstring": {
+      "version": "2.3.3",
+      "resolved": "https://registry.npmjs.org/sqlstring/-/sqlstring-2.3.3.tgz",
+      "integrity": "sha512-qC9iz2FlN7DQl3+wjwn3802RTyjCx7sDvfQEXchwa6CWOx07/WVfh91gBmQ9fahw8snwGEWU3xGzOt4tFyHLxg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/statuses": {
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/statuses/-/statuses-2.0.2.tgz",
+      "integrity": "sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/supports-color": {
+      "version": "7.2.0",
+      "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-7.2.0.tgz",
+      "integrity": "sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==",
+      "license": "MIT",
+      "dependencies": {
+        "has-flag": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/toidentifier": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz",
+      "integrity": "sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.6"
+      }
+    },
+    "node_modules/type-is": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/type-is/-/type-is-2.0.1.tgz",
+      "integrity": "sha512-OZs6gsjF4vMp32qrCbiVSkrFmXtG/AZhY3t0iAMrMBiAZyV9oALtXO8hsrHbMXF9x6L3grlFuwW2oAz7cav+Gw==",
+      "license": "MIT",
+      "dependencies": {
+        "content-type": "^1.0.5",
+        "media-typer": "^1.1.0",
+        "mime-types": "^3.0.0"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/uid-safe": {
+      "version": "2.1.5",
+      "resolved": "https://registry.npmjs.org/uid-safe/-/uid-safe-2.1.5.tgz",
+      "integrity": "sha512-KPHm4VL5dDXKz01UuEd88Df+KzynaohSL9fBh096KWAxSKZQDI2uBrVqtvRM4rwrIrRRKsdLNML/lnaaVSRioA==",
+      "license": "MIT",
+      "dependencies": {
+        "random-bytes": "~1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/unpipe": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz",
+      "integrity": "sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/validator": {
+      "version": "13.12.0",
+      "resolved": "https://registry.npmjs.org/validator/-/validator-13.12.0.tgz",
+      "integrity": "sha512-c1Q0mCiPlgdTVVVIJIrBuxNicYE+t/7oKeI9MWLj3fh/uq2Pxh/3eeWbVZ4OcGW1TUf53At0njHw5SMdA3tmMg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.10"
+      }
+    },
+    "node_modules/vary": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
+      "integrity": "sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/wrappy": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+      "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==",
+      "license": "ISC"
+    }
+  }
+}
+
+└── .gitignore

@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+
+<h2>Regra para: <%= document.nome %></h2>
+
+<div class="rule-info">
+    <p><strong>Tipo:</strong> <%= rule.tipo_regra %></p>
+    <% if (rule.tipo_regra === 'DATA') { %>
+        <p><strong>Data de Liberação:</strong> <%= rule.data_liberacao.toLocaleString() %></p>
+    <% } %>
+    <p><strong>Status:</strong> <%= rule.status %></p>
+</div>
+
+<h3>Aprovadores</h3>
+<ul class="approvers-list">
+    <% approvers.forEach(approver => { %>
+        <li>
+            <%= approver.nome %> (CPF: <%= approver.cpf %>) - 
+            <span class="<%= approver.aprovado ? 'approved' : 'pending' %>">
+                <%= approver.aprovado ? '✅ Aprovado' : '⏳ Pendente' %>
+            </span>
+            <% if (approver.aprovado) { %>
+                <small>em <%= approver.data_aprovacao.toLocaleString() %></small>
+            <% } %>
+        </li>
+    <% }) %>
+</ul>
+
+<% if (isApprover && !hasApproved) { %>
+    <form action="/approve" method="POST">
+        <input type="hidden" name="ruleId" value="<%= rule.id %>">
+        <button type="submit" class="btn-approve">Aprovar Documento</button>
+    </form>
+<% } %>
+
+<%- include('../partials/footer') %>

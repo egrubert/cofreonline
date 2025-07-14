@@ -33,31 +33,7 @@ class ReleaseRule {
         return rows;
     }
 
-    static async approve(regra_id, cpf_aprovador) {
-        const [result] = await pool.execute(
-            'UPDATE aprovadores_regras SET aprovado = TRUE, data_aprovacao = NOW() WHERE regra_id = ? AND cpf_aprovador = ?',
-            [regra_id, cpf_aprovador]
-        );
-        return result;
-    }
-
-    static async checkAllApproved(regra_id) {
-        const [rows] = await pool.execute(
-            'SELECT COUNT(*) as total, SUM(aprovado) as aprovados FROM aprovadores_regras WHERE regra_id = ?',
-            [regra_id]
-        );
-        return rows.length > 0 && rows[0].total === rows[0].aprovados;
-    }
-
-    static async updateStatus(regra_id, status) {
-        const [result] = await pool.execute(
-            'UPDATE regras_liberacao SET status = ? WHERE id = ?',
-            [status, regra_id]
-        );
-        return result;
-    }
-
-        /**
+    /**
      * Registra aprovação de um usuário
      */
     static async approve(ruleId, cpfAprovador) {
@@ -68,6 +44,12 @@ class ReleaseRule {
                  WHERE regra_id = ? AND cpf_aprovador = ?`,
                 [ruleId, cpfAprovador]
             );
+            
+            // Verifica se todas as aprovações foram concluídas
+            const allApproved = await this.checkAllApproved(ruleId);
+            if (allApproved) {
+                await this.updateStatus(ruleId, 'LIBERADO');
+            }
             
             return result.affectedRows > 0;
         } catch (error) {
@@ -89,7 +71,7 @@ class ReleaseRule {
                 [ruleId]
             );
             
-            if (rule[0].tipo_regra === 'DATA') {
+            if (rule[0]?.tipo_regra === 'DATA') {
                 const now = new Date();
                 const releaseDate = new Date(rule[0].data_liberacao);
                 return now >= releaseDate;
@@ -103,7 +85,7 @@ class ReleaseRule {
                 [ruleId]
             );
             
-            return result[0].total === result[0].aprovados;
+            return result[0]?.total === result[0]?.aprovados;
         } catch (error) {
             console.error('Erro ao verificar aprovações:', error);
             throw error;
@@ -128,9 +110,10 @@ class ReleaseRule {
             throw error;
         }
     }
+
     /**
-    * Verifica se um usuário é aprovador de uma regra
-    */
+     * Verifica se um usuário é aprovador de uma regra
+     */
     static async isUserApprover(ruleId, cpf) {
         const [rows] = await pool.execute(
             `SELECT 1 FROM aprovadores_regras 
@@ -140,6 +123,59 @@ class ReleaseRule {
         return rows.length > 0;
     }
 
+    /**
+     * Verifica se um usuário já aprovou uma regra
+     */
+    static async hasUserApproved(ruleId, cpf) {
+        const [rows] = await pool.execute(
+            `SELECT aprovado FROM aprovadores_regras 
+            WHERE regra_id = ? AND cpf_aprovador = ?`,
+            [ruleId, cpf]
+        );
+        return rows.length > 0 && rows[0].aprovado === 1;
+    }
+
+    /**
+     * Lista todos os aprovadores de uma regra com detalhes
+     */
+    static async getApprovers(ruleId) {
+        const [rows] = await pool.execute(
+            `SELECT u.nome, u.cpf, ar.aprovado, ar.data_aprovacao 
+             FROM aprovadores_regras ar
+             JOIN usuarios u ON ar.cpf_aprovador = u.cpf
+             WHERE ar.regra_id = ?`,
+            [ruleId]
+        );
+        return rows;
+    }
+
+    /**
+     * Verifica se um documento está liberado
+     */
+    static async isDocumentReleased(documento_id) {
+        const [rows] = await pool.execute(
+            `SELECT status FROM regras_liberacao 
+             WHERE documento_id = ?`,
+            [documento_id]
+        );
+        
+        return rows.some(rule => rule.status === 'LIBERADO');
+    }
+    //---------------------------------------------------------------------------------------------------
+    static async checkDocumentReleased(documentId) {
+        const rules = await this.findByDocument(documentId);
+        if (rules.length === 0) return true; // Sem regras = liberado
+        
+        return rules.every(rule => {
+            if (rule.tipo_regra === 'DATA') {
+            return new Date() >= new Date(rule.data_liberacao);
+            } else {
+            return rule.status === 'LIBERADO';
+            }
+        });
+        }
+    //----------------------------------------------------------------------------------------------------
+    
 }
 
 module.exports = ReleaseRule;
